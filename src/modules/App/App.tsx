@@ -1,4 +1,6 @@
 
+import Navigations from "../../pages/Navigations"
+
 import "../../shared/styles/style.css"
 
 function App() {
@@ -6,7 +8,7 @@ function App() {
 
   return (
     <>
-      <p>Hallo</p>
+    <Navigations />
     </>
   )
 }
