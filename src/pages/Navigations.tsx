@@ -33,7 +33,7 @@ const Navigations = () => {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/explore" element={<ExplorePage />} />
             <Route path="/messages" element={<MessagesPage />} />
-            <Route path="/notificaitons" element={<NotificaitonsPage />} />
+            <Route path="/notifications" element={<NotificaitonsPage />} />
             <Route path="/api/users/:id" element={<UserProfilePage />} />
             <Route path="/api/users/me" element={<MeProfilePage />} />
             <Route path="/api/users/me/create-post" element={<CreatePostPage />} />

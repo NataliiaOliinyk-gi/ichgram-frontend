@@ -1,0 +1,11 @@
+.appContainer {
+  min-height: 100vh;
+}
+
+.headerContainer {
+  display: flex;
+}
+
+.mainContent {
+  flex: 1;
+}
