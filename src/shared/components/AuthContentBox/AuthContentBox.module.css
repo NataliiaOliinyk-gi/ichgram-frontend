@@ -1,0 +1,64 @@
+.authContentBox {
+    border: 1px solid #dbdbdb;
+    border-radius: 1px;
+    width: 350px;
+    height: 411px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 23px;
+}
+
+.imageContainer {
+    width: 190px;
+    margin-top: 7px;
+}
+
+.textTitleBox {
+    margin-bottom: 36px;
+}
+
+.textTitle {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 125%;
+    text-align: center;
+    color: var(--grey-text-color);
+}
+
+.link {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 133%;
+    text-align: center;
+    color: var(--link-text-color);
+    padding: 2px;
+}
+
+.link:hover {
+    background-color: var(--hover-background-color);
+}
+
+.line {
+    width: 106px;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.textOr {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 115%;
+    text-transform: uppercase;
+    color: var(--grey-text-color);
+}
+
+.lineContainer {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22px;
+    margin-bottom: 70px;
+}

@@ -11,8 +11,10 @@
     --second-background-color: #efefef;
     --form-background-color: #fafafa;
     --message-background-color: #4d00ff;
-    /* --hover-background-color: #f1f3f4; */
+    --hover-background-color: #badefe;
+    --hover-form-background-color: #efefef;
     --white-background-color: #fff;
 
     --border-color: #dbdbdb;
+    --focus-border-color: #0095f6;
 }
