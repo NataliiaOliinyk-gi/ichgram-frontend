@@ -7,7 +7,7 @@ const Header: FC = ()=>{
     return (
         <header className={styles.headerContainer}>
             <div className={styles.imageContainer}>
-                <img src="../../../public/image/ICHGRA.png" alt="Ichgram" />
+                <img src="../../../public/image/ICHGRA_5.png" alt="Ichgram" />
             </div>
             <MainMenu />
         </header>
