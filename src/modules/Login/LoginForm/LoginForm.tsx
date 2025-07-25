@@ -1,32 +1,20 @@
 import type { FC } from "react";
 
-import TextField from "../../../shared/components/TextField/TextField";
-import Button from "../../../shared/components/Button/Button";
-import fields from "../../../shared/items/fields";
+import AuthForm from "../../../shared/components/AuthForm/AuthForm";
 
-// import type { IFields } from "../../../shared/items/fields";
-
-import styles from "./LoginForm.module.css";
+import type { IMyFormValues } from "../../../shared/components/AuthForm/AuthForm";
 
 const LoginForm: FC = () => {
+  const onSubmitForm = (values: IMyFormValues) => {
+    console.log(values);
+  };
+
   return (
-    <form action="">
-      <div className={styles.textFieldsBox}>
-        <TextField
-          {...fields.email}
-          // register={register}
-          //  error={errors.name}
-        />
-        <TextField
-          {...fields.password}
-          // register={register}
-          //  error={errors.name}
-        />
-      </div>
-      <div className={styles.btnBox}>
-        <Button text={"Log in"} />
-      </div>
-    </form>
+    <AuthForm
+      textBtn={"Log in"}
+      submitForm={onSubmitForm}
+      fieldsToRender={["email", "password"]}
+    />
   );
 };
 

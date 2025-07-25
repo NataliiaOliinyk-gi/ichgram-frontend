@@ -1,26 +1,21 @@
-import type { FC } from "react";
-import type { FieldError, RegisterOptions, UseFormRegister } from "react-hook-form";
+import type {
+  ITextFieldProps,
+  IMyFormValues,
+} from "../../../modules/Login/LoginForm/LoginForm";
 
 import styles from "./TextField.module.css";
 
-interface IMyFormValues {
-  email: string;
-  password: string;
-}
-
-interface ITextFieldProps extends React.InputHTMLAttributes<HTMLElement> {
-  name: string;
-  register?: UseFormRegister<IMyFormValues>
-  rules?: RegisterOptions
-  error?: FieldError
-}
-
-// name, register, rules, error, ...props
-const TextField: FC<ITextFieldProps> = ({ name, register, rules, error, ...props }) => {
+const TextField = <K extends keyof IMyFormValues>({
+  name,
+  register,
+  rules,
+  error,
+  ...props
+}: ITextFieldProps<K>) => {
   return (
     <div>
       <input
-        // {...register(name, rules)}
+        {...register(name, rules)}
         {...props}
         className={styles.textField}
       />

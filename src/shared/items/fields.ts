@@ -1,27 +1,18 @@
-interface ICheck {
-  value: number | RegExp;
-  message: string;
-}
+import type { RegisterOptions } from "react-hook-form";
+import type { IMyFormValues } from "../components/AuthForm/AuthForm";
 
-interface IRules {
-  required: string;
-  pattern?: ICheck;
-  minLength?: ICheck;
-  maxLength?: ICheck;
-}
-
-interface IFieldsItem {
+interface IFieldsItem<K extends keyof IMyFormValues> {
   type: string;
   placeholder: string;
-  name: string;
-  rules: IRules;
+  name: K;
+  rules: RegisterOptions<IMyFormValues, K>;
 }
 
 export interface IFields {
-  email: IFieldsItem;
-  fullName: IFieldsItem;
-  username: IFieldsItem;
-  password: IFieldsItem;
+  email: IFieldsItem<"email">;
+  fullName: IFieldsItem<"fullName">;
+  username: IFieldsItem<"username">;
+  password: IFieldsItem<"password">;
 }
 
 const fields: IFields = {
@@ -32,8 +23,8 @@ const fields: IFields = {
     rules: {
       required: "Email is required",
       pattern: {
-        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-        message: "Invalid email address",
+        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        message: "Email mast contain @, dot and no contain spaces",
       },
     },
   },
@@ -76,8 +67,9 @@ const fields: IFields = {
     rules: {
       required: "Password is required",
       pattern: {
-        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-        message: "Invalid email address",
+        value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\S]+$/,
+        message:
+          "Password must contains at least 1 letter, 1 number and 1 special symbol",
       },
     },
   },
