@@ -1,0 +1,30 @@
+.container {
+    width: 268px;
+    margin: 26px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.textPolicy {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 133%;
+    text-align: center;
+    padding: 2px;
+    color: var(--grey-text-color);
+}
+
+.link {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 133%;
+    color: var(--link-text-color);
+    padding: 2px;
+}
+
+.link:hover {
+    background-color: var(--hover-background-color);
+}

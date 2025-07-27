@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import type {
   FieldError,
   UseFormRegister,
@@ -9,15 +9,15 @@ import { useForm } from "react-hook-form";
 
 import TextField from "../../../shared/components/TextField/TextField";
 import Button from "../../../shared/components/Button/Button";
-import fields from "../../../shared/items/fields";
+import fields from "../../data/fields";
 
 import styles from "./AuthForm.module.css";
 
 export interface IMyFormValues {
   email: string;
-  password: string;
   fullName: string;
   username: string;
+  password: string;
 }
 
 export interface ITextFieldProps<K extends keyof IMyFormValues>
@@ -32,12 +32,14 @@ interface IAuthFormProps {
   textBtn: string;
   submitForm: (values: IMyFormValues) => void;
   fieldsToRender: (keyof IMyFormValues)[];
+  childrenPolicy?: ReactNode;
 }
 
 const AuthForm: FC<IAuthFormProps> = ({
   textBtn,
   submitForm,
   fieldsToRender,
+  childrenPolicy,
 }: IAuthFormProps) => {
   const {
     register,
@@ -65,6 +67,7 @@ const AuthForm: FC<IAuthFormProps> = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.textFieldsBox}>{elements}</div>
+      {childrenPolicy}
       <div className={styles.btnBox}>
         <Button text={textBtn} type="submit" />
       </div>

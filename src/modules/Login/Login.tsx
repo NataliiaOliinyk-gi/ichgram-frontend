@@ -6,23 +6,30 @@ import AuthFooter from "../../shared/components/AuthFooter/AuthFooter";
 
 import LoginForm from "./LoginForm/LoginForm";
 
+import styles from "./Login.module.css";
+
 const Login: FC = () => {
   return (
     <>
-      <AuthLayout>
-        <AuthContentBox
-          children={<LoginForm />}
-          showImage
-          toLink="/api/auth/forgot-password"
-          linkText="Forgot password?"
-        />
+        <div className={styles.imageContainer}>
+          <img src="../../public/image/Background.png" alt="Background" />
+        </div>
 
-        <AuthFooter
-          text="Don't have an account?"
-          linkText="Sign up"
-          toLink="/api/auth/register"
-        />
-      </AuthLayout>
+        <AuthLayout>
+          <AuthContentBox
+            childrenForm={<LoginForm />}
+            showImage
+            toLink="/api/auth/forgot-password"
+            linkText="Forgot password?"
+            isOrDevider
+          />
+
+          <AuthFooter
+            text="Don't have an account?"
+            linkText="Sign up"
+            toLink="/api/auth/register"
+          />
+        </AuthLayout>
     </>
   );
 };

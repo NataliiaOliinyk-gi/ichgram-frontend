@@ -4,19 +4,21 @@ import { Link } from "react-router-dom";
 import styles from "./AuthContentBox.module.css";
 
 interface IAuthContentBoxProps {
-  children: ReactNode;
+  childrenForm: ReactNode;
   showImage?: boolean;
-  textTitle?: string;
+  textTitle?: ReactNode;
   toLink?: string;
   linkText?: string;
+  isOrDevider?: boolean;
 }
 
 const AuthContentBox: FC<IAuthContentBoxProps> = ({
-  children,
+  childrenForm,
   showImage,
   textTitle,
   toLink,
   linkText,
+  isOrDevider,
 }) => {
   return (
     <div className={styles.authContentBox}>
@@ -32,13 +34,15 @@ const AuthContentBox: FC<IAuthContentBoxProps> = ({
         </div>
       )}
 
-      {children}
+      {childrenForm}
 
-      <div className={styles.lineContainer}>
-        <div className={styles.line}></div>
-        <p className={styles.textOr}>OR</p>
-        <div className={styles.line}></div>
-      </div>
+      {isOrDevider && (
+        <div className={styles.lineContainer}>
+          <div className={styles.line}></div>
+          <p className={styles.textOr}>OR</p>
+          <div className={styles.line}></div>
+        </div>
+      )}
 
       {toLink && (
         <div>

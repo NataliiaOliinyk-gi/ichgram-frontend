@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styles from "./AuthFooter.module.css";
 
 interface IAuthFooterProps {
-  text: string;
+  text?: string;
   linkText: string;
   toLink: string;
 }
