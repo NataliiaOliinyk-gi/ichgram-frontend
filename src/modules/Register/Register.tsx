@@ -12,7 +12,7 @@ const Register: FC = () => {
         <AuthContentBox
           childrenForm={<RegisterForm />}
           showImage
-          textTitle={
+          text={
             <>
               Sign up to see photos and videos <br />
               from your friends.

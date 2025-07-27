@@ -4,6 +4,7 @@ import AuthLayout from "../../shared/components/AuthLayout/AuthLayout";
 import AuthContentBox from "../../shared/components/AuthContentBox/AuthContentBox";
 import AuthFooter from "../../shared/components/AuthFooter/AuthFooter";
 import ForgotPasswordForm from "./ForgotPasswordForm/ForgotPasswordForm";
+import ForgotIcon from "../../shared/components/Icons/ForgotIcon";
 
 const ForgotPassword: FC = () => {
   return (
@@ -11,19 +12,15 @@ const ForgotPassword: FC = () => {
       <AuthLayout>
         <AuthContentBox
           childrenForm={<ForgotPasswordForm />}
-          showImage
-          textTitle={
-            <>
-              Enter your email, phone, or username and we'll send you a link to
-              get back into your account.
-            </>
-          }
+          icon={<ForgotIcon/>}
+          textTitle="Trouble logging in?"
+          textDescription="Enter your email and we'll send you a link to get back into your account."
+          isOrDevider
+          authLinkText="Create new account" 
+          authLinkTo="/api/auth/register"
         />
 
-        <AuthFooter 
-            linkText="Back to login" 
-            toLink="/api/auth/login" 
-        />
+        <AuthFooter linkText="Back to login" toLink="/api/auth/login" />
       </AuthLayout>
     </>
   );

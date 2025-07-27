@@ -10,11 +10,26 @@
 
 .imageContainer {
     width: 190px;
-    /* margin-top: 7px; */
 }
 
-.textTitleBox {
+.iconContainer {
+    margin-top: 6px;
+}
+
+.textBox {
     margin-bottom: 36px;
+}
+
+.textDescriptionBox {
+    width: 268px;
+}
+
+.text {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 125%;
+    text-align: center;
+    color: var(--grey-text-color);
 }
 
 .textTitle {
@@ -22,7 +37,21 @@
     font-size: 16px;
     line-height: 125%;
     text-align: center;
+    color: var(--main-text-color);
+    margin: 14px 0;
+}
+
+.textDescription {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 129%;
+    text-align: center;
     color: var(--grey-text-color);
+    margin-bottom: 16px;
+}
+
+.linkBox {
+    margin-top: 54px;
 }
 
 .link {
@@ -59,5 +88,6 @@
     justify-content: center;
     align-items: center;
     margin-top: 11px;
-    margin-bottom: 70px;
+    /* margin-bottom: 70px; */
+    margin-bottom: 16px;
 }
