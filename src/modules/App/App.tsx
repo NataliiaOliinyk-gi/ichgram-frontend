@@ -1,27 +1,37 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-import Navigations from "../../pages/Navigations"
-import Header from "../Header/Header"
-import Footer from "../Footer/Footer"
+import Navigations from "../../pages/Navigations";
+import Loader from "../../shared/components/Loader/Loader";
+import Error from "../../shared/components/Error/Error";
 
-import "../../shared/styles/style.css"
-import styles from "./App.module.css"
+import { useAppDispatch } from "../../shared/hooks/hooks";
+import { getCurrent } from "../../redux/auth/auth-thunks";
+import { selectToken, selectAuth } from "../../redux/auth/auth-selector";
+
+import "../../shared/styles/style.css";
 
 function App() {
-  
+  const token = useSelector(selectToken);
+  const { loading, error } = useSelector(selectAuth);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getCurrent());
+    }
+  }, [dispatch, token]);
+
+  if (token && loading) {
+    return <Loader loading={loading} />;
+  }
 
   return (
     <>
-    <div className={styles.appContainer}>
-      <div className={styles.headerContainer}>
-        <Header />
-        <div className={styles.mainContent}>
-          <Navigations />
-        </div>
-      </div>
-      <Footer />
-    </div>
+      <Navigations />
+      {error && <Error>{error}</Error>}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

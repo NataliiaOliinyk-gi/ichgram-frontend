@@ -18,6 +18,7 @@ import NotFoundPage from "./NotFoundPage/NotFoundPage";
 
 import PublicRoute from "./PublicRoute/PublicRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import PrivateLayout from "../shared/components/PrivateLayout/PrivateLayout";
 
 import LearnMorePage from "./LearnMorePage/LearnMorePage";
 import TermsPage from "./TermsPage/TermsPage";
@@ -28,7 +29,7 @@ const Navigations = () => {
   return (
     <Routes>
       <Route element={<PublicRoute />}>
-        <Route path="/api/auth/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/api/auth/register" element={<RegisterPage />} />
         <Route
           path="/api/auth/forgot-password"
@@ -42,16 +43,21 @@ const Navigations = () => {
       </Route>
 
       <Route element={<PrivateRoute />}>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/messages" element={<MessagesPage />} />
-        <Route path="/notifications" element={<NotificaitonsPage />} />
-        <Route path="/api/users/:id" element={<UserProfilePage />} />
-        <Route path="/api/users/me" element={<MeProfilePage />} />
-        <Route path="/api/users/me/create-post" element={<CreatePostPage />} />
+        <Route element={<PrivateLayout />}>
+          <Route path="/main" element={<MainPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/messages" element={<MessagesPage />} />
+          <Route path="/notifications" element={<NotificaitonsPage />} />
+          <Route path="/api/users/:id" element={<UserProfilePage />} />
+          <Route path="/api/users/me" element={<MeProfilePage />} />
+          <Route
+            path="/api/users/me/create-post"
+            element={<CreatePostPage />}
+          />
 
-        <Route path="/api/auth/logout" element={<LogoutPage />} />
+          <Route path="/api/auth/logout" element={<LogoutPage />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />
