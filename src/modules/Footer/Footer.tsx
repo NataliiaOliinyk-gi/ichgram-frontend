@@ -20,7 +20,7 @@ const Footer: FC = () => {
       <div className={styles.container}>
         <ul className={styles.menu}>{element}</ul>
         <div className={styles.divCopyP}>
-          <p className={styles.copyP}>© 2024 ICHgram</p>
+          <p className={styles.copyP}>© 2025 ICHgram</p>
         </div>
       </div>
     </footer>

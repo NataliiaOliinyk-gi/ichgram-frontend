@@ -57,10 +57,12 @@ const Navigations = () => {
           />
 
           <Route path="/api/auth/logout" element={<LogoutPage />} />
+
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
-      <Route path="*" element={<NotFoundPage />} />
+      {/* <Route path="*" element={<NotFoundPage />} /> */}
     </Routes>
   );
 };
