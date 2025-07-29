@@ -7,8 +7,8 @@ import type {
 
 import { useForm } from "react-hook-form";
 
-import TextField from "../../../shared/components/TextField/TextField";
-import Button from "../../../shared/components/Button/Button";
+import AuthTextField from "../AuthTextField/AuthTextField";
+import AuthButton from "../AuthButton/AuthButton";
 import fields from "../../data/fields";
 // import Error from "../Error/Error";
 
@@ -55,7 +55,7 @@ const AuthForm: FC<IAuthFormProps> = ({
   };
 
   const elements = fieldsToRender.map((fieldName) => (
-    <TextField
+    <AuthTextField
       key={fieldName}
       {...fields[fieldName]}
       name={fields[fieldName].name}
@@ -70,7 +70,7 @@ const AuthForm: FC<IAuthFormProps> = ({
       <div className={styles.textFieldsBox}>{elements}</div>
       {childrenPolicy}
       <div className={styles.btnBox}>
-        <Button text={textBtn} type="submit"
+        <AuthButton text={textBtn} type="submit"
         //  disabled={loading} 
          />
       </div>

@@ -2,19 +2,19 @@ import type { FC } from "react";
 
 import styles from "./AuthButton.module.css";
 
-interface IButtonProps {
+interface IAuthButtonProps {
   text: string;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   disabled?: boolean;
 }
 
-const Button: FC<IButtonProps> = ({
+const AuthButton: FC<IAuthButtonProps> = ({
   text,
   type = "button",
   onClick,
   disabled = false,
-}: IButtonProps) => {
+}: IAuthButtonProps) => {
   return (
     <button onClick={onClick} className={styles.btn} type={type} disabled={disabled}>
       {text}
@@ -22,4 +22,4 @@ const Button: FC<IButtonProps> = ({
   );
 };
 
-export default Button;
+export default AuthButton;
