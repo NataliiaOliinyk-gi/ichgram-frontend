@@ -13,9 +13,10 @@ const Button: FC<IButtonProps> = ({
   text,
   type = "button",
   onClick,
+  disabled = false,
 }: IButtonProps) => {
   return (
-    <button onClick={onClick} className={styles.btn} type={type}>
+    <button onClick={onClick} className={styles.btn} type={type} disabled={disabled}>
       {text}
     </button>
   );

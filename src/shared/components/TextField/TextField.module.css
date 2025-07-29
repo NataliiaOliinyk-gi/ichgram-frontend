@@ -30,10 +30,10 @@
     background-color: var(--hover-form-background-color);
 }
 
-.textFieldError{
+.textFieldError {
     font-weight: 400;
-    font-size: 10px;
-    line-height: 300%;
+    font-size: 12px;
+    line-height: 133%;
     color: var(--error-text-color);
-    margin: 6px 0;
+    margin-top: 3px;
 }

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 import Navigations from "../../pages/Navigations";
 import Loader from "../../shared/components/Loader/Loader";
-import Error from "../../shared/components/Error/Error";
 
 import { useAppDispatch } from "../../shared/hooks/hooks";
 import { getCurrent } from "../../redux/auth/auth-thunks";
@@ -13,7 +12,7 @@ import "../../shared/styles/style.css";
 
 function App() {
   const token = useSelector(selectToken);
-  const { loading, error } = useSelector(selectAuth);
+  const { loading } = useSelector(selectAuth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -29,7 +28,6 @@ function App() {
   return (
     <>
       <Navigations />
-      {error && <Error>{error}</Error>}
     </>
   );
 }

@@ -5,9 +5,13 @@ import PrivacyPolicy from "../../../shared/components/PrivacyPolicy/PrivacyPolic
 
 import type { IMyFormValues } from "../../../shared/components/AuthForm/AuthForm";
 
-const RegisterForm: FC = () => {
+interface IRegisterProps {
+  submitForm: (values: IMyFormValues) => void;
+}
+
+const RegisterForm: FC<IRegisterProps> = ({ submitForm }) => {
   const onSubmitForm = (values: IMyFormValues) => {
-    console.log(values);
+    submitForm(values);
   };
 
   return (
@@ -15,7 +19,7 @@ const RegisterForm: FC = () => {
       textBtn={"Sign up"}
       submitForm={onSubmitForm}
       fieldsToRender={["email", "fullName", "username", "password"]}
-      childrenPolicy={<PrivacyPolicy/>}
+      childrenPolicy={<PrivacyPolicy />}
     />
   );
 };

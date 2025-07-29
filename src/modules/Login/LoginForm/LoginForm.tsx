@@ -4,9 +4,13 @@ import AuthForm from "../../../shared/components/AuthForm/AuthForm";
 
 import type { IMyFormValues } from "../../../shared/components/AuthForm/AuthForm";
 
-const LoginForm: FC = () => {
+interface ILoginFormProps {
+  submitForm: (values: IMyFormValues) => void;
+}
+
+const LoginForm: FC<ILoginFormProps> = ({ submitForm }) => {
   const onSubmitForm = (values: IMyFormValues) => {
-    console.log(values);
+    submitForm(values);
   };
 
   return (

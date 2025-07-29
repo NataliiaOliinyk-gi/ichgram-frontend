@@ -1,0 +1,51 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(40, 40, 40, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modalContainer {
+    position: relative;
+    width: 548px;
+    border-radius: 12px;
+    background-color: var(--main-background-color);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 32px;
+}
+
+.descriptionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 110%;
+    color: var(--white-text-color);
+}
+
+.text {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 110%;
+    color: var(--white-text-color);
+}
+
+.textBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

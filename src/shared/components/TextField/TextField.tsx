@@ -1,7 +1,4 @@
-import type {
-  ITextFieldProps,
-  IMyFormValues,
-} from "../../../modules/Login/LoginForm/LoginForm";
+import type { ITextFieldProps, IMyFormValues } from "../AuthForm/AuthForm";
 
 import styles from "./TextField.module.css";
 

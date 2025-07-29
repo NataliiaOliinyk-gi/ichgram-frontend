@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import TextField from "../../../shared/components/TextField/TextField";
 import Button from "../../../shared/components/Button/Button";
 import fields from "../../data/fields";
+// import Error from "../Error/Error";
 
 import styles from "./AuthForm.module.css";
 
@@ -69,8 +70,11 @@ const AuthForm: FC<IAuthFormProps> = ({
       <div className={styles.textFieldsBox}>{elements}</div>
       {childrenPolicy}
       <div className={styles.btnBox}>
-        <Button text={textBtn} type="submit" />
+        <Button text={textBtn} type="submit"
+        //  disabled={loading} 
+         />
       </div>
+      {/* {error && <Error>{error}</Error>} */}
     </form>
   );
 };
