@@ -6,6 +6,7 @@ import {
   login,
   logout,
   getCurrent,
+  resendVerificationEmail,
   forgotPassword,
 } from "./auth-thunks";
 import { pending, rejected } from "../../shared/lib/redux";
@@ -59,6 +60,12 @@ const authSlice = createSlice({
         store.user = payload.user;
       })
       .addCase(getCurrent.rejected, () => initialState)
+
+      .addCase(resendVerificationEmail.pending, pending)
+      .addCase(resendVerificationEmail.fulfilled, (store) => {
+        store.loading = false;
+      })
+      .addCase(resendVerificationEmail.rejected, rejected)
 
       .addCase(forgotPassword.pending, pending)
       .addCase(forgotPassword.fulfilled, (store) => {

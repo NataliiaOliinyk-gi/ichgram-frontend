@@ -50,6 +50,11 @@
     margin-bottom: 16px;
 }
 
+.textDescription strong {
+    font-weight: 700;
+    color: var(--main-text-color);
+}
+
 .linkBox {
     margin-top: 54px;
 }

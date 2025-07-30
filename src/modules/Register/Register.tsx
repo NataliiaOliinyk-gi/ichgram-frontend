@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 
@@ -13,22 +13,30 @@ import { selectAuth } from "../../redux/auth/auth-selector";
 import { useAppDispatch } from "../../shared/hooks/hooks";
 import { register } from "../../redux/auth/auth-thunks";
 
+import highlightEmail from "../../utils/highlightEmail";
+
 import type { IRegisterPayload } from "../../shared/api/auth-api";
 
 const Register: FC = () => {
-  const [successVerify, setSuccessVerify] = useState<boolean>(false);
-  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [successRegister, setSuccessRegister] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<ReactNode>("");
+  const [registerDisabled, setRegisterDisabled] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const { error } = useSelector(selectAuth);
   const dispatch = useAppDispatch();
 
   const submitForm = useCallback(
     async (payload: IRegisterPayload) => {
+      setErrorMessage("");
       try {
-        const response = await dispatch(register(payload)).unwrap(); // отримуєш результат
-        setSuccessMessage(response.message); // зберігаєш повідомлення
-        setSuccessVerify(true);
+        const response = await dispatch(register(payload)).unwrap();
+        setSuccessMessage(highlightEmail(response.message, payload.email));
+        setSuccessRegister(true);
+        setRegisterDisabled(true);
       } catch (error) {
-        console.error("Registration failed:", error);
+        if (typeof error === "string") {
+          setErrorMessage(error);
+        }
       }
     },
     [dispatch]
@@ -37,10 +45,12 @@ const Register: FC = () => {
   return (
     <>
       <AuthLayout>
-        {successVerify && <SuccessMessage>{successMessage}</SuccessMessage>}
+        {successRegister && <SuccessMessage>{successMessage}</SuccessMessage>}
 
         <AuthContentBox
-          childrenForm={<RegisterForm submitForm={submitForm} />}
+          childrenForm={
+            <RegisterForm submitForm={submitForm} disabled={registerDisabled} errorMessage={errorMessage} />
+          }
           showImage
           text={
             <>

@@ -19,6 +19,10 @@ export interface ILoginPayload {
   password: string;
 }
 
+export interface IResendVerificationEmaiPayload {
+  email: string;
+}
+
 export interface IForgotPasswordPayload {
   email: string;
 }
@@ -58,6 +62,13 @@ export const getCurrentApi = async (
     delete backendInstance.defaults.headers["Authorization"];
     throw error;
   }
+};
+
+export const resendVerificationEmailApi = async (
+  payload: IResendVerificationEmaiPayload
+): Promise<{ message: string }> => {
+  const { data } = await backendInstance.post("auth/resend-verify-email", payload);
+  return data;
 };
 
 export const forgotPasswordApi = async (

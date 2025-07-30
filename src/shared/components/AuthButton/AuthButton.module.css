@@ -18,5 +18,10 @@
 .btn:hover {
     background-color: var(--hover-background-color);
     color: var(--second-text-color);
-    /* border: 2px solid var(--focus-border-color); */
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }

@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from "react";
+import { useState, useEffect } from "react";
 import type {
   FieldError,
   UseFormRegister,
@@ -10,7 +11,6 @@ import { useForm } from "react-hook-form";
 import AuthTextField from "../AuthTextField/AuthTextField";
 import AuthButton from "../AuthButton/AuthButton";
 import fields from "../../data/fields";
-// import Error from "../Error/Error";
 
 import styles from "./AuthForm.module.css";
 
@@ -34,6 +34,9 @@ interface IAuthFormProps {
   submitForm: (values: IMyFormValues) => void;
   fieldsToRender: (keyof IMyFormValues)[];
   childrenPolicy?: ReactNode;
+  email?: string;
+  disabled?: boolean;
+  errorMessage?: string;
 }
 
 const AuthForm: FC<IAuthFormProps> = ({
@@ -41,18 +44,49 @@ const AuthForm: FC<IAuthFormProps> = ({
   submitForm,
   fieldsToRender,
   childrenPolicy,
+  email,
+  disabled,
+  errorMessage,
 }: IAuthFormProps) => {
+  const [formValues, setFormValues] = useState<IMyFormValues | null>(null);
+
   const {
     register,
     handleSubmit,
+    setError,
     reset,
     formState: { errors },
-  } = useForm<IMyFormValues>();
+  } = useForm<IMyFormValues>({
+    defaultValues: {
+      email: email || "",
+    },
+  });
 
   const onSubmit = (values: IMyFormValues) => {
     submitForm(values);
+    setFormValues(values);
     reset();
   };
+
+  useEffect(() => {
+    const onSetError = () => {
+      if (typeof errorMessage === "string" && formValues) {
+        const match = errorMessage.match(
+          /The (\w+) '(.+)' is already in use\./
+        );
+        if (match) {
+          const [, field, value] = match;
+          if (field in formValues) {
+            setError(field as keyof IMyFormValues, {
+              type: "manual",
+              message: `${field} "${value}" is already in use.`,
+            });
+          }
+        }
+      }
+    };
+    onSetError();
+  }, [errorMessage, setError, formValues]);
 
   const elements = fieldsToRender.map((fieldName) => (
     <AuthTextField
@@ -69,12 +103,10 @@ const AuthForm: FC<IAuthFormProps> = ({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.textFieldsBox}>{elements}</div>
       {childrenPolicy}
+
       <div className={styles.btnBox}>
-        <AuthButton text={textBtn} type="submit"
-        //  disabled={loading} 
-         />
+        <AuthButton text={textBtn} type="submit" disabled={disabled} />
       </div>
-      {/* {error && <Error>{error}</Error>} */}
     </form>
   );
 };

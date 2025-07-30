@@ -18,3 +18,8 @@
     padding: 4px;
     white-space: pre-line;
 }
+
+.successMessage strong {
+    font-weight: 700;
+    color: var(--main-text-color);
+}

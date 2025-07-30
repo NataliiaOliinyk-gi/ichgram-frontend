@@ -4,24 +4,24 @@ import AuthForm from "../../../shared/components/AuthForm/AuthForm";
 
 import type { IMyFormValues } from "../../../shared/components/AuthForm/AuthForm";
 
-interface ILoginFormProps {
+interface IResendVerificationFormProps {
   submitForm: (values: IMyFormValues) => void;
-  disabled: boolean;
+  email: string;
 }
 
-const LoginForm: FC<ILoginFormProps> = ({ submitForm, disabled }) => {
-  const onSubmitForm = (values: IMyFormValues) => {
+const ResendVerificationForm: FC<IResendVerificationFormProps> = ({ submitForm, email })=>{
+    const onSubmitForm = (values: IMyFormValues) => {
     submitForm(values);
   };
 
   return (
     <AuthForm
-      textBtn={"Log in"}
+      textBtn={"Resend Email"}
       submitForm={onSubmitForm}
-      fieldsToRender={["email", "password"]}
-      disabled={disabled}
+      fieldsToRender={["email"]}
+      email={email}
     />
   );
 };
 
-export default LoginForm;
+export default ResendVerificationForm;

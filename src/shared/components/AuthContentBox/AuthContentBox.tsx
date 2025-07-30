@@ -11,7 +11,7 @@ interface IAuthContentBoxProps {
   icon?: React.ReactElement;
   text?: ReactNode;
   textTitle?: string;
-  textDescription?: string;
+  textDescription?: ReactNode;
   toLink?: string;
   linkText?: string;
   isOrDevider?: boolean;

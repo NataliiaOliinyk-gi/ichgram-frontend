@@ -31,9 +31,10 @@
 }
 
 .textFieldError {
+    width: 268px;
     font-weight: 400;
     font-size: 12px;
     line-height: 133%;
     color: var(--error-text-color);
-    margin-top: 3px;
+    margin: 4px 0;
 }

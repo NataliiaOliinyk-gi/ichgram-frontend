@@ -5,6 +5,7 @@ import {
   verifyUserApi,
   loginUserApi,
   getCurrentApi,
+  resendVerificationEmailApi,
   forgotPasswordApi,
   logoutUserApi,
 } from "../../shared/api/auth-api";
@@ -15,6 +16,7 @@ import type {
   IRegisterPayload,
   ILoginPayload,
   IAuthResponse,
+  IResendVerificationEmaiPayload,
   IForgotPasswordPayload,
 } from "../../shared/api/auth-api";
 
@@ -27,10 +29,15 @@ export const register = createAsyncThunk<
     const data = await registerApi(payload);
     return data;
   } catch (error) {
-    return rejectWithValue(
+    // return rejectWithValue(
+    //   (error as AxiosError<{ message: string }>).response?.data?.message ||
+    //     (error as AxiosError).message
+    // );
+    const message =
       (error as AxiosError<{ message: string }>).response?.data?.message ||
-        (error as AxiosError).message
-    );
+      (error as AxiosError).message;
+
+    return rejectWithValue(message);
   }
 });
 
@@ -83,11 +90,27 @@ export const getCurrent = createAsyncThunk<
   }
 });
 
+export const resendVerificationEmail = createAsyncThunk<
+  { message: string },
+  IResendVerificationEmaiPayload,
+  { rejectValue: string }
+>("auth/resend-verify-email", async (payload, { rejectWithValue }) => {
+  try {
+    const data = await resendVerificationEmailApi(payload);
+    return data;
+  } catch (error) {
+    return rejectWithValue(
+      (error as AxiosError<{ message: string }>).response?.data?.message ||
+        (error as AxiosError).message
+    );
+  }
+});
+
 export const forgotPassword = createAsyncThunk<
   { message: string },
   IForgotPasswordPayload,
   { rejectValue: string }
->("auth/forgotPassword", async (payload, { rejectWithValue }) => {
+>("auth/forgot-password", async (payload, { rejectWithValue }) => {
   try {
     const data = await forgotPasswordApi(payload);
     return data;
