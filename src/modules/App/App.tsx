@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Navigations from "../../pages/Navigations";
 import Loader from "../../shared/components/Loader/Loader";
 
-import { useAppDispatch } from "../../shared/hooks/hooks";
+import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 import { getCurrent } from "../../redux/auth/auth-thunks";
 import { selectToken, selectAuth } from "../../redux/auth/auth-selector";
 

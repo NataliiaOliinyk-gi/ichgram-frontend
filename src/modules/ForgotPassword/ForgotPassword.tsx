@@ -11,7 +11,7 @@ import SuccessMessage from "../../shared/components/SuccessMessage/SuccessMessag
 import Error from "../../shared/components/Error/Error";
 
 import { selectAuth } from "../../redux/auth/auth-selector";
-import { useAppDispatch } from "../../shared/hooks/hooks";
+import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 import { forgotPassword } from "../../redux/auth/auth-thunks";
 import highlightEmail from "../../utils/highlightEmail";
 
@@ -38,9 +38,7 @@ const ForgotPassword: FC = () => {
         {successVerify && <SuccessMessage>{successMessage}</SuccessMessage>}
 
         <AuthContentBox
-          childrenForm={
-            <ForgotPasswordForm submitForm={submitForm} />
-          }
+          childrenForm={<ForgotPasswordForm submitForm={submitForm} />}
           icon={<ForgotIcon />}
           textTitle="Trouble logging in?"
           textDescription="Enter your email and we'll send you a link to get back into your account."

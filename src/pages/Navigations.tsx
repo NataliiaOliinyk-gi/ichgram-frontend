@@ -12,6 +12,7 @@ import NotificaitonsPage from "./NotificaitonsPage/NotificaitonsPage";
 import UserProfilePage from "./UserProfilePage/UserProfilePage";
 import MyProfilePage from "./MyProfilePage/MyProfilePage";
 import CreatePostPage from "./CreatePostPage/CreatePostPage";
+import EditProfilePage from "./EditProfilePage/EditProfilePage";
 
 import LogoutPage from "./LogoutPage/LogoutPage";
 import NotFoundPage from "./NotFoundPage/NotFoundPage";
@@ -50,11 +51,13 @@ const Navigations = () => {
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/notifications" element={<NotificaitonsPage />} />
           <Route path="/api/users/:id" element={<UserProfilePage />} />
-          <Route path="/api/users/me" element={<MyProfilePage />} />
+          <Route path="/api/me" element={<MyProfilePage />} />
+          <Route path="/api/me/edit-profile" element={<EditProfilePage />} />
           <Route
-            path="/api/users/me/create-post"
+            path="/api/me/create-post"
             element={<CreatePostPage />}
           />
+          
 
           <Route path="/api/auth/logout" element={<LogoutPage />} />
 

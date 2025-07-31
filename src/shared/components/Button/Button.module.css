@@ -1,22 +1,29 @@
 .btn {
     border-radius: 8px;
-    width: 268px;
-    height: 32px;
-    background: var(--main-background-color);
     border: none;
     cursor: pointer;
+    padding: 8px 42px;
 
     font-weight: 600;
     font-size: 14px;
     line-height: 129%;
     text-align: center;
-    color: var(--white-text-color);
 
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .btn:hover {
     background-color: var(--hover-background-color);
-    color: var(--second-text-color);
-    /* border: 2px solid var(--focus-border-color); */
+    /* color: var(--second-text-color); */
+    color: var(--main-text-color);
+}
+
+.btnPrimary {
+    background: var(--main-background-color);
+    color: var(--white-text-color);
+}
+
+.btnSecondary {
+    background: var(--second-background-color);
+    color: var(--main-text-color);
 }

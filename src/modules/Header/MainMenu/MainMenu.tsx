@@ -33,7 +33,7 @@ const MainMenu: FC = () => {
     <ul className={styles.menu}>
       {element}
       <NavLink
-        to={"/api/users/me"}
+        to={"/api/me"}
         className={({ isActive }) =>
           `${styles.link} ${styles.profileContainer} ${
             isActive ? styles.active : ""

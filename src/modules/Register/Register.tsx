@@ -10,7 +10,7 @@ import SuccessMessage from "../../shared/components/SuccessMessage/SuccessMessag
 import Error from "../../shared/components/Error/Error";
 
 import { selectAuth } from "../../redux/auth/auth-selector";
-import { useAppDispatch } from "../../shared/hooks/hooks";
+import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 import { register } from "../../redux/auth/auth-thunks";
 
 import highlightEmail from "../../utils/highlightEmail";
@@ -49,7 +49,11 @@ const Register: FC = () => {
 
         <AuthContentBox
           childrenForm={
-            <RegisterForm submitForm={submitForm} disabled={registerDisabled} errorMessage={errorMessage} />
+            <RegisterForm
+              submitForm={submitForm}
+              disabled={registerDisabled}
+              errorMessage={errorMessage}
+            />
           }
           showImage
           text={

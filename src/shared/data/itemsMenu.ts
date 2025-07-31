@@ -60,7 +60,7 @@ const menuItems: IMenuItems[] = [
   },
   {
     id: nanoid(),
-    href: "/api/users/me/create-post",
+    href: "/api/me/create-post",
     text: "Create",
     icon: CreateIcon,
     iconActive: CreateIconActive,

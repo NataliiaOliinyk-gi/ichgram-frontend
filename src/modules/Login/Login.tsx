@@ -13,7 +13,7 @@ import LoginForm from "./LoginForm/LoginForm";
 import ResendVerificationForm from "./ResendVerificationForm/ResendVerificationForm";
 
 import { selectAuth } from "../../redux/auth/auth-selector";
-import { useAppDispatch } from "../../shared/hooks/hooks";
+import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 import {
   login,
   verify,
