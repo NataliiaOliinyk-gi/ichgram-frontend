@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 
@@ -13,19 +13,20 @@ import Error from "../../shared/components/Error/Error";
 import { selectAuth } from "../../redux/auth/auth-selector";
 import { useAppDispatch } from "../../shared/hooks/hooks";
 import { forgotPassword } from "../../redux/auth/auth-thunks";
+import highlightEmail from "../../utils/highlightEmail";
 
 import type { IForgotPasswordPayload } from "../../shared/api/auth-api";
 
 const ForgotPassword: FC = () => {
   const [successVerify, setSuccessVerify] = useState<boolean>(false);
-  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<ReactNode>("");
   const { error } = useSelector(selectAuth);
   const dispatch = useAppDispatch();
 
   const submitForm = useCallback(
     async (payload: IForgotPasswordPayload) => {
       const response = await dispatch(forgotPassword(payload)).unwrap();
-      setSuccessMessage(response.message);
+      setSuccessMessage(highlightEmail(response.message, payload.email));
       setSuccessVerify(true);
     },
     [dispatch]
