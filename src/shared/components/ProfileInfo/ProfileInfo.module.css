@@ -4,8 +4,8 @@
 }
 
 .avatarBorder {
-    width: 168px;
-    height: 168px;
+    width: 160px;
+    height: 160px;
     padding: 4px;
     border-radius: 50%;
     background: conic-gradient(#b93aaa, #e95950, #e99250, #eecd4a, #e99657, #e95950, #b83170, #aa3ab9);
@@ -22,7 +22,7 @@
     border-radius: 50%;
     object-fit: cover;
     background-color: white;
-    padding: 5px;
+    padding: 4px;
 }
 
 .profileInfoBox {
@@ -74,11 +74,16 @@
     font-weight: 600;
 }
 
-.biography p {
+.biographyText {
     font-weight: 400;
     font-size: 14px;
     line-height: 129%;
     color: var(--main-text-color);
+}
+
+.userFullName {
+    font-weight: 600;
+    margin-bottom: 4px;
 }
 
 .link {

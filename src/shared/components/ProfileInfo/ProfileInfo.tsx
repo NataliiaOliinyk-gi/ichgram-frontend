@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 
 import linkSvg from "../../../assets/icons/link.svg";
+import defaultAvatar from "../../../assets/icons/defaultAvatar.svg";
 import type { IUser } from "../../../typescript/interfaces";
 
 import styles from "./ProfileInfo.module.css";
@@ -21,7 +22,7 @@ const ProfileInfo: FC<IProfileInfoProps> = ({
     <section className={styles.section}>
       <div className={styles.avatarBorder}>
         <img
-          src={user.profilePhoto}
+          src={user.profilePhoto || defaultAvatar}
           alt={`${user.username}'s profile`}
           className={styles.avatarImage}
         />
@@ -61,27 +62,20 @@ const ProfileInfo: FC<IProfileInfoProps> = ({
         </div>
 
         <div className={styles.biography}>
-          <p>{user.biography}</p>
+          <p className={styles.userFullName}>{user.fullName}</p>
+          <p className={styles.biographyText}>{user.biography}</p>
         </div>
-        <div className={styles.link}>
-          <img src={linkSvg} alt="Link icon" />
-          <a href="">bit.ly/3rpiIbh</a>
-          <a href="">{user.webseite}</a>
-        </div>
+
+        {user.webseite && (
+          <div className={styles.link}>
+            <img src={linkSvg} alt="Link icon" />
+            {/* <a href="">bit.ly/3rpiIbh</a> */}
+            <a href="">{user.webseite}</a>
+          </div>
+        )}
       </div>
     </section>
   );
 };
 
 export default ProfileInfo;
-
-// id: string;
-// email: string;
-// fullName: string;
-// username: string;
-// biography?: string;
-// profilePhoto?: string;
-// webseite?: string;
-// createdAt?: Date;
-// updatedAt?: Date;
-// verified?: boolean;

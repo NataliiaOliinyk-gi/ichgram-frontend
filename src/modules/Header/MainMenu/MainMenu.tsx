@@ -1,13 +1,18 @@
 import type { FC } from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import menuItems from "../../../shared/data/itemsMenu";
+import defaultAvatar from "../../../assets/icons/defaultAvatar.svg";
+import { selectAuthUser } from "../../../redux/auth/auth-selector";
 
 import type { IMenuItems } from "../../../shared/data/itemsMenu";
 
 import styles from "./MainMenu.module.css";
 
 const MainMenu: FC = () => {
+  const user = useSelector(selectAuthUser);
+
   const element = menuItems.map((item: IMenuItems) => (
     <li key={item.id}>
       <NavLink
@@ -40,7 +45,13 @@ const MainMenu: FC = () => {
           }`
         }
       >
-        <span>Icon</span>
+        <div className={styles.avatarBorder}>
+          <img
+            src={user?.profilePhoto || defaultAvatar}
+            alt="User avatar"
+            className={styles.avatarImage}
+          />
+        </div>
         <p className={styles.text}>Profile</p>
       </NavLink>
     </ul>
