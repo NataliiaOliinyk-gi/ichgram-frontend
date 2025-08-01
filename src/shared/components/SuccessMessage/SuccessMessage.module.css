@@ -1,5 +1,5 @@
 .successMessageBox {
-    border: 1px solid #dbdbdb;
+    border: 1px solid var(--focus-border-color);
     border-radius: 1px;
     width: 350px;
     min-height: 63px;

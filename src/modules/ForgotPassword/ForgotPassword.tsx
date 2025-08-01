@@ -18,8 +18,9 @@ import highlightEmail from "../../utils/highlightEmail";
 import type { IForgotPasswordPayload } from "../../shared/api/auth-api";
 
 const ForgotPassword: FC = () => {
-  const [successVerify, setSuccessVerify] = useState<boolean>(false);
+  const [successSend, setSuccessSend] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<ReactNode>("");
+  const [formDisabled, setFormDisabled] = useState<boolean>(false);
   const { error } = useSelector(selectAuth);
   const dispatch = useAppDispatch();
 
@@ -27,7 +28,8 @@ const ForgotPassword: FC = () => {
     async (payload: IForgotPasswordPayload) => {
       const response = await dispatch(forgotPassword(payload)).unwrap();
       setSuccessMessage(highlightEmail(response.message, payload.email));
-      setSuccessVerify(true);
+      setSuccessSend(true);
+      setFormDisabled(true);
     },
     [dispatch]
   );
@@ -35,10 +37,10 @@ const ForgotPassword: FC = () => {
   return (
     <>
       <AuthLayout>
-        {successVerify && <SuccessMessage>{successMessage}</SuccessMessage>}
+        {successSend && <SuccessMessage>{successMessage}</SuccessMessage>}
 
         <AuthContentBox
-          childrenForm={<ForgotPasswordForm submitForm={submitForm} />}
+          childrenForm={<ForgotPasswordForm submitForm={submitForm} disabled={formDisabled}/>}
           icon={<ForgotIcon />}
           textTitle="Trouble logging in?"
           textDescription="Enter your email and we'll send you a link to get back into your account."
