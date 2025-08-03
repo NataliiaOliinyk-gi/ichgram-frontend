@@ -8,6 +8,7 @@ import {
   getCurrent,
   resendVerificationEmail,
   forgotPassword,
+  updateMyProfile,
 } from "./auth-thunks";
 import { pending, rejected } from "../../shared/lib/redux";
 
@@ -18,6 +19,7 @@ export interface IAuthState {
   user: null | IUser;
   loading: boolean;
   error: string | null;
+  updateStatus: "idle" | "pending" | "success" | "error";
 }
 
 const initialState: IAuthState = {
@@ -25,6 +27,7 @@ const initialState: IAuthState = {
   user: null,
   loading: false,
   error: null,
+  updateStatus: "idle",
 };
 
 const authSlice = createSlice({
@@ -58,6 +61,7 @@ const authSlice = createSlice({
         store.loading = false;
         store.token = payload.token;
         store.user = payload.user;
+        store.updateStatus = "idle";
       })
       .addCase(getCurrent.rejected, () => initialState)
 
@@ -75,7 +79,30 @@ const authSlice = createSlice({
 
       .addCase(logout.pending, pending)
       .addCase(logout.fulfilled, () => initialState)
-      .addCase(logout.rejected, rejected);
+      .addCase(logout.rejected, rejected)
+
+      .addCase(updateMyProfile.pending, (store) => {
+        store.loading = true;
+        store.error = null;
+        store.updateStatus = "pending";
+      })
+      .addCase(updateMyProfile.fulfilled, (store, { payload }) => {
+        store.loading = false;
+        store.user = payload;
+        store.updateStatus = "success";
+      })
+      .addCase(updateMyProfile.rejected, (store, action) => {
+        store.loading = false; 
+        if (
+          typeof action.payload === "string" ||
+          action.payload === undefined
+        ) {
+          store.error = action.payload ?? null;
+        } else {
+          store.error = "An unknown error occurred.";
+        }
+        store.updateStatus = "error";
+      });
   },
 });
 

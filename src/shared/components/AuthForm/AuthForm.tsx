@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 
 import AuthTextField from "../AuthTextField/AuthTextField";
 import AuthButton from "../AuthButton/AuthButton";
-import fields from "../../data/fields";
+import fields from "../../data/authFields";
 
 import styles from "./AuthForm.module.css";
 

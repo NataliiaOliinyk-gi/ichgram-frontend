@@ -63,18 +63,3 @@ const MyProfile: FC = () => {
 
 export default MyProfile;
 
-// const { id } = useParams<{ id: string }>(); // id: string | undefined
-//   if(!id) return null; // або показати лоадер / 404
-
-//   const {
-//     data: user,
-//     loading,
-//     error,
-//   } = useFetch({
-//     request: () => getUserByIdApi(id!),
-//     initialData: {} as IUser, // або null/undefined з обробкою
-//   });
-
-//   if (loading) return <p>Loading...</p>;
-//   if (error) return <p>{error}</p>;
-//   if (!user) return <p>User not found</p>;

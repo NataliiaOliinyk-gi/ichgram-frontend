@@ -8,6 +8,7 @@ interface IButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   variant?: string;
+  width?: string;
 }
 
 const Button: FC<IButtonProps> = ({
@@ -16,6 +17,7 @@ const Button: FC<IButtonProps> = ({
   onClick,
   disabled = false,
   variant = "default",
+  width = "auto",
 }: IButtonProps) => {
 
   const className = variant === "grey" ? styles.btnSecondary : styles.btnPrimary;
@@ -25,6 +27,7 @@ const Button: FC<IButtonProps> = ({
     className={`${styles.btn} ${className}`}
     type={type} 
     disabled={disabled}
+    style={{ width: `${width}` }}
     >
       {text}
     </button>

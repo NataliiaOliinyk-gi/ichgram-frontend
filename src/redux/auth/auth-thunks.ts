@@ -20,6 +20,10 @@ import type {
   IForgotPasswordPayload,
 } from "../../shared/api/auth-api";
 
+import { updateMyProfileApi } from "../../shared/api/myProfile-api";
+import type { IUpdateMyProfilePayload } from "../../shared/api/myProfile-api";
+import type { IUser } from "../../typescript/interfaces";
+
 export const register = createAsyncThunk<
   { message: string }, // що повертається
   IRegisterPayload, // аргументи, які передаються
@@ -130,6 +134,23 @@ export const logout = createAsyncThunk<
   try {
     await logoutUserApi();
     return true;
+  } catch (error) {
+    return rejectWithValue(
+      (error as AxiosError<{ message: string }>).response?.data?.message ||
+        (error as AxiosError).message
+    );
+  }
+});
+
+export const updateMyProfile = createAsyncThunk<
+  IUser, // { user: IUser }, // тип, який повертається
+  IUpdateMyProfilePayload, // аргументи payload
+  // { username: string; fullName: string; biography?: string; website?: string; profilePhoto?: string;},
+  { rejectValue: string }
+>("auth/updateMyProfile", async (payload, { rejectWithValue }) => {
+  try {
+    const data = await updateMyProfileApi(payload);
+    return data;
   } catch (error) {
     return rejectWithValue(
       (error as AxiosError<{ message: string }>).response?.data?.message ||

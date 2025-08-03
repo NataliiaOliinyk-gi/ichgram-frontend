@@ -66,11 +66,10 @@ const ProfileInfo: FC<IProfileInfoProps> = ({
           <p className={styles.biographyText}>{user.biography}</p>
         </div>
 
-        {user.webseite && (
+        {user.website && (
           <div className={styles.link}>
             <img src={linkSvg} alt="Link icon" />
-            {/* <a href="">bit.ly/3rpiIbh</a> */}
-            <a href="">{user.webseite}</a>
+            <a href={user.website} target="_blank">{user.website}</a>
           </div>
         )}
       </div>

@@ -5,7 +5,7 @@ export interface IUser {
   username: string;
   biography?: string;
   profilePhoto?: string;
-  webseite?: string;
+  website?: string;
   createdAt?: Date;
   updatedAt?: Date;
   verified?: boolean;

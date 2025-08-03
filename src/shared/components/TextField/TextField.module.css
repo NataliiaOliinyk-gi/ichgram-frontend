@@ -1,9 +1,18 @@
+.inputBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+    /* додано для абсолютного позиціювання .counter */
+}
+
 .textField {
     border: 1px solid var(--border-color);
-    border-radius: 3px;
-    width: 268px;
-    height: 38px;
-    background: var(--form-background-color);
+    border-radius: 12px;
+    width: 100%;
+    height: 42px;
+    background: var(--white-background-color);
     padding: 8px;
 
     font-weight: 400;
@@ -12,6 +21,13 @@
     color: var(--main-text-color);
 
     transition: ease-in-out 500ms;
+}
+
+.label {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--main-text-color);
 }
 
 .textField::placeholder {
@@ -36,4 +52,36 @@
     line-height: 133%;
     color: var(--error-text-color);
     margin-top: 3px;
+}
+
+.link {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 129%;
+    color: var(--link-text-color);
+}
+
+.textarea {
+    height: auto;
+    min-height: 82px;
+    /* або більше, залежно від дизайну */
+    resize: vertical;
+    /* дозволити ручну зміну висоти */
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 129%;
+    color: var(--main-text-color);
+    white-space: pre-wrap;
+    font-family: "Roboto", sans-serif;
+    padding: 8px 130px 2px 22px;
+}
+
+.counter {
+    position: absolute;
+    bottom: 6px;
+    right: 16px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 133%;
+    color: var(--grey-text-color);
 }

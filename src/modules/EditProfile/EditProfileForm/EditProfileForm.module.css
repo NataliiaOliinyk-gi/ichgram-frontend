@@ -1,0 +1,11 @@
+.textFieldsBox {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.btnBox {
+    width: 268px;
+    margin-top: 67px;
+    margin-bottom: 11px;
+}
