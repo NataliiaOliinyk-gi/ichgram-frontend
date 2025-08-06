@@ -11,7 +11,6 @@ import MessagesPage from "./MessagesPage/MessagesPage";
 import NotificaitonsPage from "./NotificaitonsPage/NotificaitonsPage";
 import UserProfilePage from "./UserProfilePage/UserProfilePage";
 import MyProfilePage from "./MyProfilePage/MyProfilePage";
-import CreatePostPage from "./CreatePostPage/CreatePostPage";
 import EditProfilePage from "./EditProfilePage/EditProfilePage";
 
 import LogoutPage from "./LogoutPage/LogoutPage";
@@ -28,45 +27,40 @@ import CookiesPolicyPage from "./CookiesPolicyPage/CookiesPolicyPage";
 
 const Navigations = () => {
   return (
-    <Routes>
-      <Route element={<PublicRoute />}>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/api/auth/register" element={<RegisterPage />} />
-        <Route
-          path="/api/auth/forgot-password"
-          element={<ForgotPasswordPage />}
-        />
-
-        <Route path="/learn-more" element={<LearnMorePage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="/cookies-policy" element={<CookiesPolicyPage />} />
-      </Route>
-
-      <Route element={<PrivateRoute />}>
-        <Route element={<PrivateLayout />}>
-          <Route path="/main" element={<MainPage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/messages" element={<MessagesPage />} />
-          <Route path="/notifications" element={<NotificaitonsPage />} />
-          <Route path="/api/users/:id" element={<UserProfilePage />} />
-          <Route path="/api/me" element={<MyProfilePage />} />
-          <Route path="/api/me/edit-profile" element={<EditProfilePage />} />
+    <>
+      <Routes>
+        <Route element={<PublicRoute />}>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/api/auth/register" element={<RegisterPage />} />
           <Route
-            path="/api/me/create-post"
-            element={<CreatePostPage />}
+            path="/api/auth/forgot-password"
+            element={<ForgotPasswordPage />}
           />
-          
 
-          <Route path="/api/auth/logout" element={<LogoutPage />} />
-
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/learn-more" element={<LearnMorePage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/cookies-policy" element={<CookiesPolicyPage />} />
         </Route>
-      </Route>
 
-      {/* <Route path="*" element={<NotFoundPage />} /> */}
-    </Routes>
+        <Route element={<PrivateRoute />}>
+          <Route element={<PrivateLayout />}>
+            <Route path="/main" element={<MainPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/messages" element={<MessagesPage />} />
+            <Route path="/notifications" element={<NotificaitonsPage />} />
+            <Route path="/api/users/:id" element={<UserProfilePage />} />
+            <Route path="/api/me" element={<MyProfilePage />} />
+            <Route path="/api/me/edit-profile" element={<EditProfilePage />} />
+
+            <Route path="/api/auth/logout" element={<LogoutPage />} />
+
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Route>
+      </Routes>
+    </>
   );
 };
 

@@ -64,9 +64,7 @@
 .textarea {
     height: auto;
     min-height: 82px;
-    /* або більше, залежно від дизайну */
     resize: vertical;
-    /* дозволити ручну зміну висоти */
     font-weight: 400;
     font-size: 14px;
     line-height: 129%;

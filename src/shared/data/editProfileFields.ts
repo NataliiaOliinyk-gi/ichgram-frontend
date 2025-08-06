@@ -5,7 +5,7 @@ interface IFieldsItemEditProfile<K extends keyof IEditProfileFormValues> {
   type: string;
   placeholder: string;
   name: K;
-  label: string;
+  label?: string;
   rules: RegisterOptions<IEditProfileFormValues, keyof IEditProfileFormValues>;
 }
 

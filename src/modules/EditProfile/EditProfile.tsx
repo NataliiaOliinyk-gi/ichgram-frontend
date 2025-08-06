@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import Button from "../../shared/components/Button/Button";
 import EditProfileForm from "./EditProfileForm/EditProfileForm";
+import UploadPhotoBox from "../../shared/components/UploadPhotoBox/UploadPhotoBox";
 import Loader from "../../shared/components/Loader/Loader";
 import Error from "../../shared/components/Error/Error";
 import SuccessMessage from "../../shared/components/SuccessMessage/SuccessMessage";
@@ -35,9 +36,7 @@ const EditProfile: FC = () => {
 
   const [showPhotoUploader, setShowPhotoUploader] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
-  const [photoError, setPhotoError] = useState("");
 
   useEffect(() => {
     if (updateProfileStatus === "success") {
@@ -53,7 +52,6 @@ const EditProfile: FC = () => {
       fullName: values.fullName,
       website: values.website?.trim() ?? "",
       biography: values.biography?.trim() ?? "",
-      // profilePhoto: defaultUser.profilePhoto,
     };
 
     try {
@@ -69,38 +67,19 @@ const EditProfile: FC = () => {
     }
   };
 
-  // Обробка вибору файлу:
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      setSelectedFile(file);
-      setPhotoPreview(URL.createObjectURL(file));
-      setPhotoError("");
-    } else {
-      setPhotoError("Please select a valid image file");
-    }
+  const onhandleFileChange = (file: File) => {
+    setSelectedFile(file);
   };
 
-  // Завантаження на сервер:
+  // // Завантаження на сервер:
   const handlePhotoUpload = async () => {
     if (!selectedFile) return;
 
     setUploadingPhoto(true);
-    setPhotoError("");
-    try {
-      await dispatch(updateMyProfile({ profilePhoto: selectedFile }));
+    await dispatch(updateMyProfile({ profilePhoto: selectedFile }));
 
-      setShowPhotoUploader(false);
-      setSelectedFile(null);
-      setPhotoPreview(null);
-    } catch (error) {
-      // setPhotoError("Upload failed. Please try again.");
-      if (typeof error === "string") {
-        setPhotoError(error);
-      }
-    } finally {
-      setUploadingPhoto(false);
-    }
+    setShowPhotoUploader(false);
+    setSelectedFile(null);
   };
 
   return (
@@ -122,7 +101,6 @@ const EditProfile: FC = () => {
         </div>
 
         <div className={styles.btnBox}>
-          {/* <Button text="New photo" /> */}
           <Button
             text="New photo"
             onClick={() => setShowPhotoUploader((prev) => !prev)}
@@ -134,11 +112,11 @@ const EditProfile: FC = () => {
 
       {showPhotoUploader && (
         <div className={styles.uploadBox}>
-          <input type="file" accept="image/*" onChange={handleFileChange} />
-          {photoPreview && (
-            <img src={photoPreview} alt="Preview" className={styles.preview} />
-          )}
-          {photoError && <Error>{photoError}</Error>}
+          <UploadPhotoBox
+            onhandleFileChange={onhandleFileChange}
+            previewClassName="previewEditProfile"
+          />
+
           <div className={styles.uploadBtnBox}>
             <Button
               text="Save Photo"
@@ -155,7 +133,6 @@ const EditProfile: FC = () => {
         fieldsToRender={["username", "fullName", "website", "biography"]}
         user={currentUser!}
         errorMessage={errorMessage}
-        // onFieldError={handleFieldError}
       />
 
       {successEdit && <SuccessMessage>{successMessage}</SuccessMessage>}
@@ -166,11 +143,3 @@ const EditProfile: FC = () => {
 };
 
 export default EditProfile;
-
-// const handleFieldError = (
-//   field: keyof IEditProfileFormValues,
-//   message: string
-// ) => {
-//   // можна використати для логів або додаткової обробки
-//   console.log("Field error", field, message);
-// };

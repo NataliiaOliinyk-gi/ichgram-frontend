@@ -72,21 +72,13 @@
 }
 
 .uploadBox {
-  margin-top: 1rem;
+  margin-top: 16px;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 16px;
 }
 
-.preview {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1px solid #ccc;
-}
-
-.uploadBtnBox {
+/* .uploadBtnBox {
   display: flex;
-  gap: 0.5rem;
-}
+  gap: 8px;
+} */

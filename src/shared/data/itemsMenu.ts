@@ -14,12 +14,16 @@ import NotificationsIconActive from "../components/Icons/NotificationsIconActive
 import CreateIcon from "../components/Icons/CreateIcon";
 import CreateIconActive from "../components/Icons/CreateIconActive";
 
+import type { ModalType } from "../../redux/modal/modal-slise";
+
 export interface IMenuItems {
   id: string;
   href: string;
   text: string;
   icon: React.FC<SVGProps<SVGSVGElement>>;
   iconActive: React.FC<SVGProps<SVGSVGElement>>;
+  type?: "link" | "modal";
+  modalType?: ModalType;
 }
 
 const menuItems: IMenuItems[] = [
@@ -64,6 +68,8 @@ const menuItems: IMenuItems[] = [
     text: "Create",
     icon: CreateIcon,
     iconActive: CreateIconActive,
+    type: "modal",
+    modalType: "createPost",
   },
 ];
 

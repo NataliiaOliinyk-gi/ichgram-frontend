@@ -1,0 +1,32 @@
+.hiddenInput {
+    display: none;
+}
+
+.uploadIconWrapper {
+    cursor: pointer;
+}
+
+.uploadIcon {
+    width: 154px;
+    height: 154px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.uploadIcon:hover {
+    opacity: 1;
+}
+
+.preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.previewEditProfile {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}

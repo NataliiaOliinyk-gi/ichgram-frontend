@@ -4,17 +4,37 @@ import { Link } from "react-router-dom";
 import menuItems from "../../shared/data/itemsMenu";
 
 import type { IMenuItems } from "../../shared/data/itemsMenu";
+import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
+import { openModal } from "../../redux/modal/modal-slise";
 
 import styles from "./Footer.module.css";
 
 const Footer: FC = () => {
-  const element = menuItems.map(({ id, href, text }: IMenuItems) => (
-    <li key={id}>
-      <Link to={href} className={styles.link}>
-        {text}
-      </Link>
-    </li>
-  ));
+  const dispatch = useAppDispatch();
+
+  const handleModalClick = (event: React.MouseEvent, type: string) => {
+    event.preventDefault();
+    dispatch(openModal(type as "createPost"));
+  };
+
+  const element = menuItems.map((item: IMenuItems) => {
+    const isModal = item.type === "modal";
+    return (
+      <li key={item.id}>
+        <Link
+          to={item.href}
+          className={styles.link}
+          onClick={
+            isModal
+              ? (event) => handleModalClick(event, item.modalType!)
+              : undefined
+          }
+        >
+          {item.text}
+        </Link>
+      </li>
+    );
+  });
   return (
     <footer className={styles.wrapper}>
       <div className={styles.container}>

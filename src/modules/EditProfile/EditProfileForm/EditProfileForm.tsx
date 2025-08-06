@@ -25,7 +25,7 @@ export interface IEditProfileFormValues {
 export interface ITextFieldEditProps<K extends keyof IEditProfileFormValues>
   extends React.InputHTMLAttributes<HTMLInputElement> {
   name: K;
-  label: string;
+  label?: string;
   register: UseFormRegister<IEditProfileFormValues>;
   rules: RegisterOptions<IEditProfileFormValues, K>;
   error: FieldError;
@@ -38,7 +38,6 @@ interface IEditProfileFormProps {
   user: IUser;
   disabled?: boolean;
   errorMessage?: string;
-  // onFieldError?: (field: keyof IEditProfileFormValues, message: string) => void;
 }
 
 const EditProfileForm: FC<IEditProfileFormProps> = ({
@@ -48,11 +47,8 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({
   user,
   disabled,
   errorMessage,
-}: // onFieldError,
+}:
 IEditProfileFormProps) => {
-  // const [formValues, setFormValues] = useState<IEditProfileFormValues | null>(
-  //   null
-  // );
 
   const {
     register,
@@ -75,7 +71,6 @@ IEditProfileFormProps) => {
 
   const onSubmit = (values: IEditProfileFormValues) => {
     submitForm(values);
-    // setFormValues(values);
   };
 
   useEffect(() => {
@@ -89,8 +84,6 @@ IEditProfileFormProps) => {
           type: "manual",
           message: `${field} "${value}" is already in use.`,
         });
-
-        // onFieldError?.(fieldName, `${field} "${value}" is already in use.`);
       }
     }
   }, [errorMessage, setError]);
