@@ -38,7 +38,7 @@ const CreatePostModal: FC = () => {
       await addPostApi(payload);
 
       dispatch(closeModal());
-      navigate("/api/me");
+      navigate("/api/me", { state: { refreshPosts: true } });
     } catch (error) {
       setError(true);
       const message =

@@ -1,16 +1,17 @@
 import type { FC } from "react";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import type { AxiosError } from "axios";
 
 import ProfileInfo from "../../shared/components/ProfileInfo/ProfileInfo";
-import ProfileTape from "../../shared/components/ProfileTape/ProfileTape";
+import PostsInProfile from "../../shared/components/PostsInProfile/PostsInProfile";
 import Loader from "../../shared/components/Loader/Loader";
 import Error from "../../shared/components/Error/Error";
 
-// import useFetch from "../../shared/hooks/useFetch";
 import { getMyProfileApi } from "../../shared/api/myProfile-api";
+import { getMyPostsApi } from "../../shared/api/post-api";
 
-import type { IUser } from "../../typescript/interfaces";
+import type { IUser, IPost } from "../../typescript/interfaces";
 
 import styles from "./MyProfile.module.css";
 
@@ -22,15 +23,22 @@ const initialUser: IUser = {
 };
 
 const MyProfile: FC = () => {
+  const location = useLocation();
+  const shouldRefreshPosts = location.state?.refreshPosts;
+
   const [user, setUser] = useState<IUser>(initialUser);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loadingUser, setLoadingUser] = useState<boolean>(false);
+  const [errorUser, setErrorUser] = useState<string | null>(null);
+
+  const [posts, setPosts] = useState<IPost[]>([]);
+  const [loadingPosts, setLoadingPosts] = useState<boolean>(false);
+  const [errorPosts, setErrorPosts] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMyProfileInfo = async () => {
       try {
-        setLoading(true);
-        setError(null);
+        setLoadingUser(true);
+        setErrorUser(null);
         const data = await getMyProfileApi();
         if (data !== undefined) {
           setUser(data);
@@ -40,26 +48,51 @@ const MyProfile: FC = () => {
           (error as AxiosError<{ message: string }>).response?.data?.message ||
           (error as AxiosError).message ||
           "Unbekannter Fehler";
-        setError(message);
+        setErrorUser(message);
       } finally {
-        setLoading(false);
+        setLoadingUser(false);
       }
     };
 
-    fetchData();
+    fetchMyProfileInfo();
   }, []);
+
+  useEffect(() => {
+    const fetchMyPosts = async () => {
+      try {
+        setLoadingPosts(true);
+        setErrorPosts(null);
+        const data = await getMyPostsApi();
+        if (data !== undefined) {
+          setPosts(data);
+        }
+      } catch (error) {
+        const message =
+          (error as AxiosError<{ message: string }>).response?.data?.message ||
+          (error as AxiosError).message ||
+          "Unbekannter Fehler";
+        setErrorPosts(message);
+      } finally {
+        setLoadingPosts(false);
+      }
+    };
+
+    fetchMyPosts();
+  }, [shouldRefreshPosts]);
 
   return (
     <div className={styles.container}>
       {user && <ProfileInfo isMe user={user} />}
 
-      <ProfileTape />
+      {loadingUser && <Loader loading={loadingUser} />}
+      {errorUser && <Error>{errorUser}</Error>}
 
-      {loading && <Loader loading={loading} />}
-      {error && <Error>{error}</Error>}
+      <PostsInProfile posts={posts} />
+
+      {loadingPosts && <Loader loading={loadingPosts} />}
+      {errorPosts && <Error>{errorPosts}</Error>}
     </div>
   );
 };
 
 export default MyProfile;
-

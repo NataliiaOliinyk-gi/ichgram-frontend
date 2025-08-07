@@ -13,7 +13,7 @@ export interface IUser {
 
 export interface IPost {
   id: string;
-  userId: string;
+  userId: IUser;
   text: string;
   photo: string;
   createdAt?: Date;

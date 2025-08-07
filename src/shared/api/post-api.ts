@@ -22,3 +22,8 @@ export const addPostApi = async (payload: IAddPostPayload): Promise<IPost> => {
 
   return data;
 };
+
+export const getMyPostsApi = async (): Promise<IPost[]> => {
+  const { data } = await backendInstance.get("/posts/my");
+  return data;
+};
