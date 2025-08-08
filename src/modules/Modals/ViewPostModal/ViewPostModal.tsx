@@ -6,7 +6,11 @@ import smileyIcon from "../../../assets/icons/smaily.svg";
 import likeIcon from "../../../assets/icons/like.svg";
 import commentIcon from "../../../assets/icons/comment.svg";
 
+import { useAppDispatch } from "../../../shared/hooks/useAppDispatch";
+import { openEditSelectionModal } from "../../../redux/modal/modal-slise";
+
 import type { IPost } from "../../../typescript/interfaces";
+import type { ModalType } from "../../../redux/modal/modal-slise";
 
 import styles from "./ViewPostModal.module.css";
 
@@ -15,7 +19,12 @@ interface IViewPostProps {
 }
 
 const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
-  console.log(post);
+  const dispatch = useAppDispatch();
+
+  const handleModalClick = (event: React.MouseEvent, type: ModalType) => {
+    event.preventDefault();
+    dispatch(openEditSelectionModal({ type, postData: post }));
+  };
 
   return (
     <div className={styles.conteiner}>
@@ -38,9 +47,12 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
             <p className={styles.username}>{post.userId.username}</p>
           </div>
 
-          <div className={styles.iconBox}>
+          <button
+            className={styles.iconBtnBox}
+            onClick={(event) => handleModalClick(event, "editSelection")}
+          >
             <img src={moreIcon} alt="more" />
-          </div>
+          </button>
         </div>
 
         <div className={styles.postDescriptionContainer}>
@@ -56,8 +68,10 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
             <div className={styles.postBox}>
               <div className={styles.post}>
                 <p>
-                  <span className={styles.usernameText}>{post.userId.username}</span>
-                  <span >{post.text}</span>
+                  <span className={styles.usernameText}>
+                    {post.userId.username}
+                  </span>
+                  <span>{post.text}</span>
                 </p>
               </div>
               <p className={styles.infoData}>1 day</p>

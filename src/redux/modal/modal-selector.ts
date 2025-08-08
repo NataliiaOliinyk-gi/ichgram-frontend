@@ -1,5 +1,7 @@
 import type { RootState } from "../store";
 
-export const selectModalType = (store: RootState) => store.modal.modalType;
+export const selectModalStack = (state: RootState) => state.modal.modalStack;
 
-export const selectPostData = (store: RootState) => store.modal.postData;
+
+// export const selectModalType = (store: RootState) => store.modal.modalType;
+// export const selectPostData = (store: RootState) => store.modal.postData;

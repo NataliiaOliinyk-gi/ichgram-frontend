@@ -38,7 +38,8 @@ const CreatePostModal: FC = () => {
       await addPostApi(payload);
 
       dispatch(closeModal());
-      navigate("/api/me", { state: { refreshPosts: true } });
+      // navigate("/api/me", { state: { refreshPosts: true } });
+      navigate("/api/me", { state: { refreshPosts: Date.now() } });
     } catch (error) {
       setError(true);
       const message =

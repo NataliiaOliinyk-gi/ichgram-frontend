@@ -9,11 +9,13 @@ import styles from "./UploadPhotoBox.module.css";
 interface IUploadPhotoBoxProps {
   onhandleFileChange: (file: File) => void;
   previewClassName?: string;
+  defaultPhotoUrl?: string;
 }
 
 const UploadPhotoBox: FC<IUploadPhotoBoxProps> = ({
   onhandleFileChange,
   previewClassName,
+  defaultPhotoUrl,
 }: IUploadPhotoBoxProps) => {
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [photoError, setPhotoError] = useState("");
@@ -32,7 +34,7 @@ const UploadPhotoBox: FC<IUploadPhotoBoxProps> = ({
 
   return (
     <>
-      {!photoPreview && (
+      {!photoPreview && !defaultPhotoUrl && (
         <>
           <label htmlFor="photoUpload" className={styles.uploadIconWrapper}>
             <img src={uploadIcon} alt="Upload" className={styles.uploadIcon} />
@@ -46,8 +48,9 @@ const UploadPhotoBox: FC<IUploadPhotoBoxProps> = ({
           />
         </>
       )}
-      {photoPreview && (
-        <img src={photoPreview} alt="Preview" className={`${styles.preview} ${previewClassName ? styles[previewClassName] : ""}`} />
+      {(photoPreview || defaultPhotoUrl) && (
+        <img src={photoPreview || defaultPhotoUrl} 
+        alt="Preview" className={`${styles.preview} ${previewClassName ? styles[previewClassName] : ""}`} />
       )}
       {photoError && <Error>{photoError}</Error>}
     </>

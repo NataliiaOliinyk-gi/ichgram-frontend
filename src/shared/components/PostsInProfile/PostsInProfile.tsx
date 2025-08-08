@@ -21,14 +21,14 @@ const PostsInProfile: FC<IPostsInProfileProps> = ({
   };
 
   const elements = posts
-    .sort((a, b) => {
-      const dateA = new Date(a.createdAt ?? 0).getTime();
-      const dateB = new Date(b.createdAt ?? 0).getTime();
-      return dateB - dateA;
-    })
+    // .sort((a, b) => {
+    //   const dateA = new Date(a.createdAt ?? 0).getTime();
+    //   const dateB = new Date(b.createdAt ?? 0).getTime();
+    //   return dateB - dateA;
+    // })
     .map((item) => (
       <div
-        key={item.id}
+        key={item._id}
         className={styles.imageContainer}
         onClick={() => handleClick(item)}
       >

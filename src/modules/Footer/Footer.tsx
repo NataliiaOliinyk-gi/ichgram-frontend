@@ -3,18 +3,20 @@ import { Link } from "react-router-dom";
 
 import menuItems from "../../shared/data/itemsMenu";
 
-import type { IMenuItems } from "../../shared/data/itemsMenu";
 import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 import { openModal } from "../../redux/modal/modal-slise";
+
+import type { IMenuItems } from "../../shared/data/itemsMenu";
+import type { ModalType } from "../../redux/modal/modal-slise";
 
 import styles from "./Footer.module.css";
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
 
-  const handleModalClick = (event: React.MouseEvent, type: string) => {
+  const handleModalClick = (event: React.MouseEvent, type: ModalType) => {
     event.preventDefault();
-    dispatch(openModal(type as "createPost"));
+    dispatch(openModal(type));
   };
 
   const element = menuItems.map((item: IMenuItems) => {

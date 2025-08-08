@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../../shared/hooks/useAppDispatch";
 import { openModal } from "../../../redux/modal/modal-slise";
 
 import type { IMenuItems } from "../../../shared/data/itemsMenu";
+import type { ModalType } from "../../../redux/modal/modal-slise";
 
 import styles from "./MainMenu.module.css";
 
@@ -17,9 +18,9 @@ const MainMenu: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleModalClick = (event: React.MouseEvent, type: string) => {
+  const handleModalClick = (event: React.MouseEvent, type: ModalType) => {
     event.preventDefault();
-    dispatch(openModal(type as "createPost"));
+    dispatch(openModal(type));
   };
 
   const element = menuItems.map((item: IMenuItems) => {
@@ -29,7 +30,11 @@ const MainMenu: FC = () => {
       <li key={item.id}>
         <NavLink
           to={item.href}
-          onClick={isModal ? (event) => handleModalClick(event, item.modalType!) : undefined}
+          onClick={
+            isModal
+              ? (event) => handleModalClick(event, item.modalType!)
+              : undefined
+          }
           className={({ isActive }) =>
             `${styles.link} ${isActive ? styles.active : ""}`
           }

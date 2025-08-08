@@ -5,38 +5,62 @@ import type { IPost } from "../../typescript/interfaces";
 export type ModalType =
   | "createPost"
   | "viewPost"
-  | "editProfile"
+  | "editSelection"
+  | "editPost"
   | "deletePost"
   | null;
 
-interface IModalState {
+interface IModalStackItem {
   modalType: ModalType;
   postData?: IPost | null;
 }
 
+interface IModalState {
+  modalStack: IModalStackItem[];
+}
+
 const initialState: IModalState = {
-  modalType: null,
-  postData: null,
+  modalStack: [],
 };
 
 const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    openModal(store, { payload }: PayloadAction<IModalState["modalType"]>) {
-      store.modalType = payload;
+    openModal(store, { payload }: PayloadAction<ModalType>) {
+      store.modalStack.push({ modalType: payload });
     },
     openViewPostModal(store, { payload }: PayloadAction<IPost>) {
-      store.modalType = "viewPost";
-      store.postData = payload;
+      store.modalStack.push({ modalType: "viewPost", postData: payload });
+    },
+    openEditSelectionModal(
+      store,
+      { payload }: PayloadAction<{ type: ModalType; postData: IPost }>
+    ) {
+      store.modalStack.push({
+        modalType: payload.type,
+        postData: payload.postData,
+      });
+    },
+    openEditPostModal(store, { payload }: PayloadAction<IPost>) {
+      store.modalStack.push({ modalType: "editPost", postData: payload });
+    },
+    openDeletePostModal(store, { payload }: PayloadAction<IPost>) {
+      store.modalStack.push({ modalType: "deletePost", postData: payload });
     },
     closeModal(store) {
-      store.modalType = null;
-      store.postData = null;
+      store.modalStack.pop(); // Закриває лише верхню модалку
     },
   },
 });
 
-export const { openModal, closeModal, openViewPostModal } = modalSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  openViewPostModal,
+  openEditSelectionModal,
+  openEditPostModal,
+  openDeletePostModal,
+} = modalSlice.actions;
 
 export default modalSlice.reducer;

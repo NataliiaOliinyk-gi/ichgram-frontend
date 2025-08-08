@@ -1,0 +1,66 @@
+.modalContainer {
+    border-radius: 12px;
+    width: 400px;
+    overflow: hidden;
+}
+
+.titleBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 22px;
+}
+
+.title {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    text-align: center;
+    color: var(--main-text-color);
+}
+
+.description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: var(--grey-text-color);
+}
+
+.selectBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    list-style: none;
+}
+
+.link {
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+    padding: 19px;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: var(--main-text-color);
+
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.link:hover {
+    background-color: var(--second-background-color);
+}
+
+.last {
+    border-radius: 0 0 12px 12px;
+}
+
+.danger {
+    color: var(--danger-text-color);
+}
