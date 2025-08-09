@@ -1,10 +1,11 @@
 import type { FC } from "react";
 
-import defaultAvatar from "../../../assets/icons/defaultAvatar.svg";
+import Avatar from "../../../shared/components/Avatar/Avatar";
+import PostInfoBox from "../../../shared/components/PostInfoBox/PostInfoBox";
+
 import moreIcon from "../../../assets/icons/more.svg";
 import smileyIcon from "../../../assets/icons/smaily.svg";
-import likeIcon from "../../../assets/icons/like.svg";
-import commentIcon from "../../../assets/icons/comment.svg";
+import getTimeAgo from "../../../shared/utils/getTimeAgo";
 
 import { useAppDispatch } from "../../../shared/hooks/useAppDispatch";
 import { openEditSelectionModal } from "../../../redux/modal/modal-slise";
@@ -26,6 +27,8 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
     dispatch(openEditSelectionModal({ type, postData: post }));
   };
 
+   const postDataInfo = getTimeAgo(post.updatedAt ?? 0);
+
   return (
     <div className={styles.conteiner}>
       {/* photo */}
@@ -37,13 +40,7 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
         {/* title */}
         <div className={styles.titleBox}>
           <div className={styles.usernameBox}>
-            <div className={styles.avatarBox}>
-              <img
-                src={post.userId.profilePhoto || defaultAvatar}
-                alt="User avatar"
-                className={styles.avatar}
-              />
-            </div>
+            <Avatar profilePhoto={post.userId.profilePhoto} />
             <p className={styles.username}>{post.userId.username}</p>
           </div>
 
@@ -58,13 +55,7 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
         <div className={styles.postDescriptionContainer}>
           {/* post */}
           <div className={styles.postDescriptionBox}>
-            <div className={styles.avatarBox}>
-              <img
-                src={post.userId.profilePhoto || defaultAvatar}
-                alt="User avatar"
-                className={styles.avatar}
-              />
-            </div>
+            <Avatar profilePhoto={post.userId.profilePhoto} />
             <div className={styles.postBox}>
               <div className={styles.post}>
                 <p>
@@ -74,7 +65,7 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
                   <span>{post.text}</span>
                 </p>
               </div>
-              <p className={styles.infoData}>1 day</p>
+              <p className={styles.infoData}>{postDataInfo}</p>
             </div>
           </div>
 
@@ -83,17 +74,11 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
         </div>
 
         {/* post info */}
+
         <div className={styles.postInfoBox}>
-          <div className={styles.iconsBox}>
-            <img src={likeIcon} alt="like" />
-            <img src={commentIcon} alt="comment" />
-          </div>
+          <PostInfoBox />
           <div className={styles.infoBox}>
-            <div className={styles.infoLikesBox}>
-              <p>25</p>
-              <p>likes</p>
-            </div>
-            <p className={styles.infoData}>1 day</p>
+            <p className={styles.infoData}>{postDataInfo}</p>
           </div>
         </div>
 

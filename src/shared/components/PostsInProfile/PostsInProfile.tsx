@@ -20,21 +20,15 @@ const PostsInProfile: FC<IPostsInProfileProps> = ({
     dispatch(openViewPostModal(post));
   };
 
-  const elements = posts
-    // .sort((a, b) => {
-    //   const dateA = new Date(a.createdAt ?? 0).getTime();
-    //   const dateB = new Date(b.createdAt ?? 0).getTime();
-    //   return dateB - dateA;
-    // })
-    .map((item) => (
-      <div
-        key={item._id}
-        className={styles.imageContainer}
-        onClick={() => handleClick(item)}
-      >
-        <img src={item.photo} alt="photo" className={styles.image} />
-      </div>
-    ));
+  const elements = posts.map((item) => (
+    <div
+      key={item._id}
+      className={styles.imageContainer}
+      onClick={() => handleClick(item)}
+    >
+      <img src={item.photo} alt="photo" className={styles.image} />
+    </div>
+  ));
 
   return (
     <section className={styles.sectionContainer}>

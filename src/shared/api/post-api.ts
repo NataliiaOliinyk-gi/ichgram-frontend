@@ -53,3 +53,8 @@ export const deletePostApi = async (id: string): Promise<IPost> => {
   const { data } = await backendInstance.delete(`/posts/${id}`);
   return data;
 };
+
+export const getPostsApi = async (): Promise<IPost[]> => {
+  const { data } = await backendInstance.get("/posts");
+  return data;
+};
