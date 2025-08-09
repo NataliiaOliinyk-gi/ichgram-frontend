@@ -50,7 +50,7 @@ const Navigations = () => {
             <Route path="/explore" element={<ExplorePage />} />
             <Route path="/messages" element={<MessagesPage />} />
             <Route path="/notifications" element={<NotificaitonsPage />} />
-            <Route path="/api/users/:id" element={<UserProfilePage />} />
+            <Route path="/users/:id" element={<UserProfilePage />} />
             <Route path="/api/me" element={<MyProfilePage />} />
             <Route path="/api/me/edit-profile" element={<EditProfilePage />} />
 

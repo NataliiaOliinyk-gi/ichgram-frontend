@@ -27,6 +27,14 @@
     margin-right: 4px;
 }
 
+.link {
+    text-decoration: none;
+}
+
+.username:hover {
+    color: var(--hover-text-color);
+}
+
 .grey {
     font-weight: 400;
     font-size: 14px;
@@ -67,7 +75,7 @@
     color: var(--hover-text-color);
 }
 
-.postInfoBox{
+.postInfoBox {
     margin-left: -14px;
 }
 
@@ -85,15 +93,16 @@
     margin-right: 4px;
 }
 
-.descriptionBox{
-padding-bottom: 37px;
+.descriptionBox {
+    padding-bottom: 37px;
 }
 
-.postBox{
+.postBox {
     margin: 10px 0;
 }
-.viewComentsBox p{
-     font-weight: 400;
+
+.viewComentsBox p {
+    font-weight: 400;
     font-size: 12px;
     line-height: 129%;
     color: var(--grey-text-color);

@@ -58,3 +58,8 @@ export const getPostsApi = async (): Promise<IPost[]> => {
   const { data } = await backendInstance.get("/posts");
   return data;
 };
+
+export const getPostsByUserApi = async (id: string): Promise<IPost[]> => {
+  const { data } = await backendInstance.get(`/posts/user/${id}`);
+  return data;
+};

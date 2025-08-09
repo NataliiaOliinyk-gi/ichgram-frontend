@@ -11,9 +11,16 @@ export interface IUser {
   verified?: boolean;
 }
 
+export interface IUserFromPost {
+  _id: string;
+  fullName: string;
+  username: string;
+  profilePhoto?: string;
+}
+
 export interface IPost {
   _id: string;
-  userId: IUser;
+  userId: IUserFromPost;
   text: string;
   photo: string;
   createdAt?: Date;

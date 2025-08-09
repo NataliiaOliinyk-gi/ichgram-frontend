@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import type { IPost } from "../../../typescript/interfaces";
+import { Link } from "react-router-dom";
 
 import Avatar from "../../../shared/components/Avatar/Avatar";
 import PostInfoBox from "../../../shared/components/PostInfoBox/PostInfoBox";
@@ -20,7 +21,9 @@ const PostElement: FC<IPostElementProps> = ({ post }) => {
       <div className={styles.titleBox}>
         <Avatar profilePhoto={post.userId.profilePhoto} />
         <div className={styles.titleDescription}>
-          <p className={styles.username}>{post.userId.username}</p>
+          <Link to={`/users/${post.userId._id}`} className={styles.link}>
+            <p className={styles.username}>{post.userId.username}</p>
+          </Link>
           <span className={styles.grey}> • </span>
           <p className={styles.grey}>{postDataInfo}</p>
           <span className={styles.grey}> • </span>
