@@ -7,12 +7,16 @@ import Loader from "../../shared/components/Loader/Loader";
 import Error from "../../shared/components/Error/Error";
 
 import { getPostsApi } from "../../shared/api/post-api";
+import { seedFromFeed } from "../../redux/likes/likes-slise";
+import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 
 import type { IPost } from "../../typescript/interfaces";
 
 import styles from "./Main.module.css";
 
 const Main: FC = () => {
+  const dispatch = useAppDispatch();
+
   const [posts, setPosts] = useState<IPost[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,6 +29,7 @@ const Main: FC = () => {
         const data = await getPostsApi();
         if (data !== undefined) {
           setPosts(data);
+          dispatch(seedFromFeed(data));
         }
       } catch (error) {
         const message =
@@ -38,7 +43,7 @@ const Main: FC = () => {
     };
 
     fetchMyPosts();
-  }, []);
+  }, [dispatch]);
 
   const elements = posts.map((item) => (
     <PostElement key={item._id} post={item} />

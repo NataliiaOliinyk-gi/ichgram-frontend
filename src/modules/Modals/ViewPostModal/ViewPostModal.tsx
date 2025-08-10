@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { useSelector } from "react-redux";
 
 import Avatar from "../../../shared/components/Avatar/Avatar";
 import PostInfoBox from "../../../shared/components/PostInfoBox/PostInfoBox";
@@ -7,6 +8,9 @@ import moreIcon from "../../../assets/icons/more.svg";
 import smileyIcon from "../../../assets/icons/smaily.svg";
 import getTimeAgo from "../../../shared/utils/getTimeAgo";
 
+import { selectLikeByPostId } from "../../../redux/likes/likes-selector";
+import { toggleOptimistic } from "../../../redux/likes/likes-slise";
+import { toggleLike } from "../../../redux/likes/likes-thunks";
 import { useAppDispatch } from "../../../shared/hooks/useAppDispatch";
 import { openEditSelectionModal } from "../../../redux/modal/modal-slise";
 
@@ -21,11 +25,18 @@ interface IViewPostProps {
 
 const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
   const dispatch = useAppDispatch();
+  const like = useSelector(selectLikeByPostId(post._id));
 
   const handleModalClick = (event: React.MouseEvent, type: ModalType) => {
     event.preventDefault();
     dispatch(openEditSelectionModal({ type, postData: post }));
   };
+
+    const handleToggle = () => {
+      dispatch(toggleOptimistic({ postId: post._id }));
+      dispatch(toggleLike({ postId: post._id }));
+    };
+  
 
    const postDataInfo = getTimeAgo(post.updatedAt ?? 0);
 
@@ -76,7 +87,12 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
         {/* post info */}
 
         <div className={styles.postInfoBox}>
-          <PostInfoBox />
+          <PostInfoBox
+            likesCount={like?.likesCount ?? post.likesCount}
+            liked={like?.isLiked ?? !!post.isLikedByCurrentUser}
+            loading={!!like?.loading}
+            onToggle={handleToggle}
+          />
           <div className={styles.infoBox}>
             <p className={styles.infoData}>{postDataInfo}</p>
           </div>

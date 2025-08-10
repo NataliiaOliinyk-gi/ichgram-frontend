@@ -1,11 +1,17 @@
 import type { FC } from "react";
 import type { IPost } from "../../../typescript/interfaces";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Avatar from "../../../shared/components/Avatar/Avatar";
 import PostInfoBox from "../../../shared/components/PostInfoBox/PostInfoBox";
 
 import getTimeAgo from "../../../shared/utils/getTimeAgo";
+
+import { toggleOptimistic } from "../../../redux/likes/likes-slise";
+import { toggleLike } from "../../../redux/likes/likes-thunks";
+import { selectLikeByPostId } from "../../../redux/likes/likes-selector";
+import { useAppDispatch } from "../../../shared/hooks/useAppDispatch";
 
 import styles from "./PostElement.module.css";
 
@@ -14,6 +20,16 @@ interface IPostElementProps {
 }
 
 const PostElement: FC<IPostElementProps> = ({ post }) => {
+  const like = useSelector(selectLikeByPostId(post._id));
+  const dispatch = useAppDispatch();
+
+  const handleToggle = () => {
+    // оптимістично
+    dispatch(toggleOptimistic({ postId: post._id }));
+    // реальний запит
+    dispatch(toggleLike({ postId: post._id }));
+  };
+
   const postDataInfo = getTimeAgo(post.updatedAt ?? 0);
 
   return (
@@ -38,7 +54,12 @@ const PostElement: FC<IPostElementProps> = ({ post }) => {
 
       <div className={styles.descriptionBox}>
         <div className={styles.postInfoBox}>
-          <PostInfoBox />
+          <PostInfoBox
+            likesCount={like?.likesCount ?? post.likesCount}
+            liked={like?.isLiked ?? !!post.isLikedByCurrentUser}
+            loading={!!like?.loading}
+            onToggle={handleToggle}
+          />
         </div>
         <div className={styles.postBox}>
           <div className={styles.post}>
@@ -53,7 +74,7 @@ const PostElement: FC<IPostElementProps> = ({ post }) => {
         <div className={styles.viewComentsBox}>
           <p>
             <span>View all comments </span>
-            <span>(732)</span>
+            <span>({post.commentsCount})</span>
           </p>
         </div>
       </div>

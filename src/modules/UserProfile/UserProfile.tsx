@@ -10,6 +10,8 @@ import Error from "../../shared/components/Error/Error";
 
 import { getUserByIdApi } from "../../shared/api/user-api";
 import { getPostsByUserApi } from "../../shared/api/post-api";
+import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
+import { seedFromFeed } from "../../redux/likes/likes-slise";
 
 import type { IUser, IPost } from "../../typescript/interfaces";
 
@@ -24,8 +26,7 @@ const initialUser: IUser = {
 
 const UserProfile: FC = () => {
   const { id } = useParams();
-  //   const id = useParams<{ id: string }>().id!;
-  
+  const dispatch = useAppDispatch();
 
   const [user, setUser] = useState<IUser>(initialUser);
   const [loadingUser, setLoadingUser] = useState<boolean>(false);
@@ -37,7 +38,7 @@ const UserProfile: FC = () => {
 
   useEffect(() => {
     if (!id) return;
-    const fetchMyProfileInfo = async () => {
+    const fetchProfileInfo = async () => {
       try {
         setLoadingUser(true);
         setErrorUser(null);
@@ -56,18 +57,19 @@ const UserProfile: FC = () => {
       }
     };
 
-    fetchMyProfileInfo();
+    fetchProfileInfo();
   }, [id]);
 
   useEffect(() => {
     if (!id) return;
-    const fetchMyPosts = async () => {
+    const fetchPosts = async () => {
       try {
         setLoadingPosts(true);
         setErrorPosts(null);
         const data = await getPostsByUserApi(id);
         if (data !== undefined) {
           setPosts(data);
+          dispatch(seedFromFeed(data));
         }
       } catch (error) {
         const message =
@@ -80,8 +82,8 @@ const UserProfile: FC = () => {
       }
     };
 
-    fetchMyPosts();
-  }, [id]);
+    fetchPosts();
+  }, [id, dispatch]);
 
   return (
     <div className={styles.container}>

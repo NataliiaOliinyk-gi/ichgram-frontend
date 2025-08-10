@@ -27,3 +27,11 @@
     line-height: 129%;
     color: var(--main-text-color);
 }
+
+.likeBtn{
+    cursor: pointer;
+    border: none;
+    background-color: var(--white-background-color);
+
+    margin-left: -6px;
+}

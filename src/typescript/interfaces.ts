@@ -23,6 +23,14 @@ export interface IPost {
   userId: IUserFromPost;
   text: string;
   photo: string;
+  likesCount: number;
+  commentsCount: number;
   createdAt?: Date;
   updatedAt?: Date;
+  isLikedByCurrentUser: boolean;
 }
+
+export interface IToggleLike { 
+    liked: boolean; 
+    likesCount: number;
+};

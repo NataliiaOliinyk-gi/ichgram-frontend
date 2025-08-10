@@ -10,6 +10,8 @@ import Error from "../../shared/components/Error/Error";
 
 import { getMyProfileApi } from "../../shared/api/myProfile-api";
 import { getMyPostsApi } from "../../shared/api/post-api";
+import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
+import { seedFromFeed } from "../../redux/likes/likes-slise";
 
 import type { IUser, IPost } from "../../typescript/interfaces";
 
@@ -25,6 +27,8 @@ const initialUser: IUser = {
 const MyProfile: FC = () => {
   const location = useLocation();
   const shouldRefreshPosts = location.state?.refreshPosts;
+
+  const dispatch = useAppDispatch();
 
   const [user, setUser] = useState<IUser>(initialUser);
   const [loadingUser, setLoadingUser] = useState<boolean>(false);
@@ -65,6 +69,7 @@ const MyProfile: FC = () => {
         const data = await getMyPostsApi();
         if (data !== undefined) {
           setPosts(data);
+          dispatch(seedFromFeed(data));
         }
       } catch (error) {
         const message =
@@ -78,7 +83,7 @@ const MyProfile: FC = () => {
     };
 
     fetchMyPosts();
-  }, [shouldRefreshPosts]);
+  }, [shouldRefreshPosts, dispatch]);
 
   return (
     <div className={styles.container}>
