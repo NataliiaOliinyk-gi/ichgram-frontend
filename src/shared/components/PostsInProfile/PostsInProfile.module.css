@@ -5,13 +5,29 @@
 }
 
 .imageContainer {
+    position: relative;
     width: 307px;
     height: 307px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.imageContainer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.imageContainer:hover::after {
+    opacity: 1;
 }

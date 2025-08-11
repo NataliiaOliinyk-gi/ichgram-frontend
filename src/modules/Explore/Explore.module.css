@@ -1,0 +1,52 @@
+.container {
+    margin-top: 89px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.postsContainer {
+    /* флюїдна 3-колоночна сітка з авто-рядками */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 317px;
+    /* базова висота рядка */
+    gap: 4px;
+    grid-auto-flow: dense;
+    /* щільне заповнення прогалин */
+    width: 100%;
+    max-width: 975px;
+}
+
+.item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Спан для мозаїки */
+.tall {
+    grid-row: span 2;
+}
+
+/* Hover */
+.item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.item:hover::after {
+    opacity: 1;
+}

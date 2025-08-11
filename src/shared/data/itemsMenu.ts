@@ -29,7 +29,7 @@ export interface IMenuItems {
 const menuItems: IMenuItems[] = [
   {
     id: nanoid(),
-    href: "/",
+    href: "/main",
     text: "Home",
     icon: HomeIcon,
     iconActive: HomeIconActive,
