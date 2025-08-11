@@ -27,8 +27,6 @@ const PostInfoBox: FC<IPostInfoBoxProps> = ({
           className={styles.likeBtn}
           onClick={onToggle}
           disabled={loading}
-          aria-pressed={liked}
-          aria-label={liked ? "Unlike" : "Like"}
         >
           {liked ? (
             <img src={likeRedIcon} alt="like" />
@@ -49,7 +47,3 @@ const PostInfoBox: FC<IPostInfoBoxProps> = ({
 };
 
 export default PostInfoBox;
-
-{
-  /* <img src={likeIcon} alt="like" /> */
-}

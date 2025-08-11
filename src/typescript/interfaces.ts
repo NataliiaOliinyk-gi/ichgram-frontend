@@ -30,7 +30,16 @@ export interface IPost {
   isLikedByCurrentUser: boolean;
 }
 
-export interface IToggleLike { 
-    liked: boolean; 
-    likesCount: number;
-};
+export interface IToggleLike {
+  liked: boolean;
+  likesCount: number;
+}
+
+export interface IComment {
+   _id: string;
+  userId: IUserFromPost;
+  postId: string;
+  text: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}

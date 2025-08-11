@@ -12,6 +12,7 @@ import { toggleOptimistic } from "../../../redux/likes/likes-slise";
 import { toggleLike } from "../../../redux/likes/likes-thunks";
 import { selectLikeByPostId } from "../../../redux/likes/likes-selector";
 import { useAppDispatch } from "../../../shared/hooks/useAppDispatch";
+import { openViewPostModal } from "../../../redux/modal/modal-slise";
 
 import styles from "./PostElement.module.css";
 
@@ -30,7 +31,12 @@ const PostElement: FC<IPostElementProps> = ({ post }) => {
     dispatch(toggleLike({ postId: post._id }));
   };
 
+  const handleClick = (post: IPost) => {
+    dispatch(openViewPostModal(post));
+  };
+
   const postDataInfo = getTimeAgo(post.updatedAt ?? 0);
+  const isComment: boolean = post.commentsCount > 0;
 
   return (
     <div className={styles.container}>
@@ -71,11 +77,21 @@ const PostElement: FC<IPostElementProps> = ({ post }) => {
             </p>
           </div>
         </div>
-        <div className={styles.viewComentsBox}>
-          <p>
-            <span>View all comments </span>
-            <span>({post.commentsCount})</span>
-          </p>
+        <div
+          className={styles.viewComentsBox}
+          onClick={() => handleClick(post)}
+        >
+          {isComment && (
+            <p>
+              <span>View all comments </span>
+              <span>({post.commentsCount})</span>
+            </p>
+          )}
+          {!isComment && (
+            <p>
+              <span>Add comment </span>
+            </p>
+          )}
         </div>
       </div>
     </div>
