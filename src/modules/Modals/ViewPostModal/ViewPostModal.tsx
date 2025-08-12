@@ -2,6 +2,7 @@ import type { FC } from "react";
 import type { AxiosError } from "axios";
 import { useSelector } from "react-redux";
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Avatar from "../../../shared/components/Avatar/Avatar";
 import PostInfoBox from "../../../shared/components/PostInfoBox/PostInfoBox";
@@ -17,7 +18,10 @@ import { selectLikeByPostId } from "../../../redux/likes/likes-selector";
 import { toggleOptimistic } from "../../../redux/likes/likes-slise";
 import { toggleLike } from "../../../redux/likes/likes-thunks";
 import { useAppDispatch } from "../../../shared/hooks/useAppDispatch";
-import { openEditSelectionModal } from "../../../redux/modal/modal-slise";
+import {
+  openEditSelectionModal,
+  closeModal,
+} from "../../../redux/modal/modal-slise";
 import {
   getCommentsByPostIdApi,
   addCommentApi,
@@ -44,6 +48,7 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
   const [loadingAddComment, setLoadingAddComment] = useState<boolean>(false);
   const [errorAddComment, setErrorAddComment] = useState<string | null>(null);
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const like = useSelector(selectLikeByPostId(post._id));
 
@@ -93,6 +98,12 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
     dispatch(toggleLike({ postId: post._id }));
   };
 
+  const goToUser = (event: React.MouseEvent) => {
+    event.preventDefault(); // блокуємо стандартну поведінку посилання
+    dispatch(closeModal());
+    navigate(`/users/${post.userId._id}`);
+  };
+
   const submitForm = async (payload: IAddCommentPayload) => {
     try {
       setLoadingAddComment(true);
@@ -131,7 +142,9 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
         <div className={styles.titleBox}>
           <div className={styles.usernameBox}>
             <Avatar profilePhoto={post.userId.profilePhoto} />
-            <p className={styles.username}>{post.userId.username}</p>
+            <button className={styles.btnLink} onClick={goToUser}>
+              <p className={styles.username}>{post.userId.username}</p>
+            </button>
           </div>
 
           <button

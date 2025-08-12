@@ -2,6 +2,7 @@ import backendInstance from "./instance";
 import type { IUser } from "../../typescript/interfaces";
 
 export interface IUpdateMyProfilePayload {
+  id: string
   username?: string;
   fullName?: string;
   biography?: string;

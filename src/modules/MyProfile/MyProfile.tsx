@@ -18,10 +18,12 @@ import type { IUser, IPost } from "../../typescript/interfaces";
 import styles from "./MyProfile.module.css";
 
 const initialUser: IUser = {
-  id: "",
+  _id: "",
   email: "",
   fullName: "",
   username: "",
+  followersCount: 0,
+  followingCount: 0,
 };
 
 const MyProfile: FC = () => {
@@ -87,7 +89,7 @@ const MyProfile: FC = () => {
 
   return (
     <div className={styles.container}>
-      {user && <ProfileInfo isMe user={user} />}
+      {user && <ProfileInfo isMe user={user} posts={posts} />}
 
       {loadingUser && <Loader loading={loadingUser} />}
       {errorUser && <Error>{errorUser}</Error>}

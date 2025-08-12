@@ -1,23 +1,35 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Button from "../Button/Button";
+import FollowButton from "../FollowButton/FollowButton";
 
 import linkSvg from "../../../assets/icons/link.svg";
 import defaultAvatar from "../../../assets/icons/defaultAvatar.svg";
+
+import { selectFollowByUserId } from "../../../redux/follows/follows-selector";
+
 import type { IUser } from "../../../typescript/interfaces";
+import type { IPost } from "../../../typescript/interfaces";
 
 import styles from "./ProfileInfo.module.css";
 
 interface IProfileInfoProps {
   user: IUser;
   isMe?: boolean;
+  posts: IPost[];
 }
 
 const ProfileInfo: FC<IProfileInfoProps> = ({
   user,
   isMe = false,
+  posts,
 }: IProfileInfoProps) => {
+
+  const followData = useSelector(selectFollowByUserId(user._id));
+  const followersCount = followData?.followersCount ?? user.followersCount;
+
   return (
     <section className={styles.section}>
       <div className={styles.avatarBorder}>
@@ -40,7 +52,12 @@ const ProfileInfo: FC<IProfileInfoProps> = ({
 
           {!isMe && (
             <div className={styles.buttonsBox}>
-              <Button text={"Follow"} />
+              {/* <Button text={"Follow"} /> */}
+              <FollowButton
+                targetId={user._id}
+                initialFollowing={user.isFollowedByCurrentUser}
+                initialFollowersCount={user.followersCount}
+              />
               <Button text={"Message"} variant={"grey"} />
             </div>
           )}
@@ -48,15 +65,15 @@ const ProfileInfo: FC<IProfileInfoProps> = ({
 
         <div className={styles.info}>
           <div>
-            <span>129</span>
+            <span>{posts.length}</span>
             <p>posts</p>
           </div>
           <div>
-            <span>9993</span>
+            <span>{followersCount}</span>
             <p>followers</p>
           </div>
           <div>
-            <span>59</span>
+            <span>{user.followingCount}</span>
             <p>following</p>
           </div>
         </div>

@@ -5,11 +5,13 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/auth-slice";
 import modalReducer from "./modal/modal-slise";
 import likesReducer from "./likes/likes-slise";
+import followsReducer from "./follows/follows-slise";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   modal: modalReducer,
   likes: likesReducer,
+  follows: followsReducer,
 });
 
 const persistConfig = {

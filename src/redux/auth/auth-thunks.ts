@@ -33,10 +33,6 @@ export const register = createAsyncThunk<
     const data = await registerApi(payload);
     return data;
   } catch (error) {
-    // return rejectWithValue(
-    //   (error as AxiosError<{ message: string }>).response?.data?.message ||
-    //     (error as AxiosError).message
-    // );
     const message =
       (error as AxiosError<{ message: string }>).response?.data?.message ||
       (error as AxiosError).message;

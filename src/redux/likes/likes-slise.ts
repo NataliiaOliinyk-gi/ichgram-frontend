@@ -44,7 +44,7 @@ const initialState: ILikesState = {
 
 const likesSlice = createSlice({
   name: "likes",
-  initialState: initialState,
+  initialState,
   reducers: {
     // Засіяти зі списку постів
     seedFromFeed: (
@@ -65,12 +65,6 @@ const likesSlice = createSlice({
           loading: false,
           error: null,
         };
-        // ensureItem(store, _id, {
-        //   isLiked: !!isLikedByCurrentUser, 
-        //   likesCount,
-        //   loading: false,
-        //   error: null,
-        // });
       });
     },
     // Оптимістичний toggle до відповіді сервера

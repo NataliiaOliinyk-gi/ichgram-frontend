@@ -2,6 +2,7 @@ import type { FC } from "react";
 import type { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import ProfileInfo from "../../shared/components/ProfileInfo/ProfileInfo";
 import PostsInProfile from "../../shared/components/PostsInProfile/PostsInProfile";
@@ -12,21 +13,27 @@ import { getUserByIdApi } from "../../shared/api/user-api";
 import { getPostsByUserApi } from "../../shared/api/post-api";
 import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 import { seedFromFeed } from "../../redux/likes/likes-slise";
+import { seedUserFollowState } from "../../redux/follows/follows-slise";
+import { selectAuthUser } from "../../redux/auth/auth-selector";
 
 import type { IUser, IPost } from "../../typescript/interfaces";
 
 import styles from "./UserProfile.module.css";
 
 const initialUser: IUser = {
-  id: "",
+  _id: "",
   email: "",
   fullName: "",
   username: "",
+  followersCount: 0,
+  followingCount: 0,
 };
 
 const UserProfile: FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+
+  const me = useSelector(selectAuthUser);
 
   const [user, setUser] = useState<IUser>(initialUser);
   const [loadingUser, setLoadingUser] = useState<boolean>(false);
@@ -45,6 +52,13 @@ const UserProfile: FC = () => {
         const data = await getUserByIdApi(id);
         if (data !== undefined) {
           setUser(data);
+          dispatch(
+            seedUserFollowState({
+              userId: data._id,
+              isFollowedByCurrentUser: data.isFollowedByCurrentUser,
+              followersCount: data.followersCount,
+            })
+          );
         }
       } catch (error) {
         const message =
@@ -58,7 +72,7 @@ const UserProfile: FC = () => {
     };
 
     fetchProfileInfo();
-  }, [id]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (!id) return;
@@ -85,9 +99,11 @@ const UserProfile: FC = () => {
     fetchPosts();
   }, [id, dispatch]);
 
+  const isMe = me?._id === user._id;
+
   return (
     <div className={styles.container}>
-      {user && <ProfileInfo user={user} />}
+      {user && <ProfileInfo user={user} posts={posts} isMe={isMe} />}
 
       {loadingUser && <Loader loading={loadingUser} />}
       {errorUser && <Error>{errorUser}</Error>}

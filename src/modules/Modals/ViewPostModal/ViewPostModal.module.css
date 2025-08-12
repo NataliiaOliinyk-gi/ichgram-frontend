@@ -43,7 +43,7 @@
 .usernameBox {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
 }
 
 .username {
@@ -51,6 +51,16 @@
     font-size: 14px;
     line-height: 129%;
     color: var(--link-auth-text-color);
+}
+
+.btnLink {
+    cursor: pointer;
+    border: none;
+    background-color: var(--white-background-color);
+}
+
+.username:hover {
+    color: var(--hover-text-color);
 }
 
 .iconBtnBox {
