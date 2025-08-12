@@ -16,18 +16,24 @@ import styles from "./FollowButton.module.css";
 
 interface IFollowButtonProps {
   targetId: string;
-  initialFollowing?: boolean; // якщо є з бекенду  ??? isFollowing
-  initialFollowersCount?: number; //  з бекенду - на профілі followersCount
-  variant?: "primary" | "grey" | "link";
-  size?: "sm" | "md";
+  initialFollowing?: boolean; 
+  initialFollowersCount?: number; 
+  variantWhenFollowing?: "primary" | "secondary" | "outline" | "hidden";
+  variantWhenNotFollowing?: "primary" | "secondary" | "outline";
+  textWhenFollowing?: string;
+  textWhenNotFollowing?: string;
+  width?: string;
 }
 
 const FollowButton: FC<IFollowButtonProps> = ({
   targetId,
   initialFollowing,
   initialFollowersCount,
-//   variant = "default",
-  //   size = "md",
+  variantWhenFollowing = "secondary",     // у профілі (Unfollow)
+  variantWhenNotFollowing = "primary",    // у профілі (Follow)
+  textWhenFollowing = "Unfollow",
+  textWhenNotFollowing = "Follow",
+  width,
 }) => {
   const dispatch = useAppDispatch();
   const item = useSelector(selectFollowByUserId(targetId));
@@ -48,6 +54,11 @@ const FollowButton: FC<IFollowButtonProps> = ({
   const isFollowing = item?.isFollowing ?? initialFollowing ?? false;
   const loading = item?.loading ?? false;
 
+   // Якщо підписані і треба ховати кнопку
+  if (isFollowing && variantWhenFollowing === "hidden") {
+    return null;
+  }
+
   const onClick = () => {
     if (isFollowing) {
       dispatch(unfollowUser({ targetId }));
@@ -56,15 +67,19 @@ const FollowButton: FC<IFollowButtonProps> = ({
     }
   };
 
+  const variant = isFollowing ? variantWhenFollowing : variantWhenNotFollowing;
+  const text = isFollowing ? textWhenFollowing : textWhenNotFollowing;
+
+   if (variant === "hidden") return null;
+
   return (
     <div className={styles.followBtn}>
       <Button
-        text={isFollowing ? "Unfollow" : "Follow"}
-        variant={isFollowing ? "grey" : "default"}
-        // variant={variant}
-        // size={size}
+        text={text}
+        variant={variant}
         onClick={onClick}
         disabled={loading}
+        width={width}
       />
     </div>
   );

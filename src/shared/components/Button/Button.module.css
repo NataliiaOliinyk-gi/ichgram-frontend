@@ -14,7 +14,6 @@
 
 .btn:hover {
     background-color: var(--hover-background-color);
-    /* color: var(--second-text-color); */
     color: var(--main-text-color);
 }
 
@@ -27,3 +26,14 @@
     background: var(--second-background-color);
     color: var(--main-text-color);
 }
+
+.btnOutline {
+    background-color: var(--white-background-color);
+    color: var(--second-text-color);
+    padding: 0;
+}
+
+.btnOutline:hover {
+    color: var(--hover-text-color);
+}
+

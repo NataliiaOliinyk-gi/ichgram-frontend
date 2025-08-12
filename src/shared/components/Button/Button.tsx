@@ -7,7 +7,7 @@ interface IButtonProps {
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   disabled?: boolean;
-  variant?: string;
+  variant?: "primary" | "secondary" | "outline";
   width?: string;
 }
 
@@ -16,18 +16,23 @@ const Button: FC<IButtonProps> = ({
   type = "button",
   onClick,
   disabled = false,
-  variant = "default",
+  variant = "primary",
   width = "auto",
 }: IButtonProps) => {
-
-  const className = variant === "grey" ? styles.btnSecondary : styles.btnPrimary;
+  const variantClass =
+    {
+      primary: styles.btnPrimary,
+      secondary: styles.btnSecondary,
+      outline: styles.btnOutline,
+    }[variant] || styles.btnPrimary;
 
   return (
-    <button onClick={onClick} 
-    className={`${styles.btn} ${className}`}
-    type={type} 
-    disabled={disabled}
-    style={{ width: `${width}` }}
+    <button
+      onClick={onClick}
+      className={`${styles.btn} ${variantClass}`}
+      type={type}
+      disabled={disabled}
+      style={{ width: `${width}` }}
     >
       {text}
     </button>

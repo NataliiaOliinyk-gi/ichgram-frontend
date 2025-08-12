@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 import Avatar from "../../../shared/components/Avatar/Avatar";
 import PostInfoBox from "../../../shared/components/PostInfoBox/PostInfoBox";
+import FollowButton from "../../../shared/components/FollowButton/FollowButton";
 
 import getTimeAgo from "../../../shared/utils/getTimeAgo";
 
@@ -49,8 +50,14 @@ const PostElement: FC<IPostElementProps> = ({ post }) => {
           <span className={styles.grey}> • </span>
           <p className={styles.grey}>{postDataInfo}</p>
           <span className={styles.grey}> • </span>
-          {/* если не подписан, то подписаться - доставить условие!!!! */}
-          <button className={styles.btn}>follow</button>
+
+          <FollowButton
+            targetId={post.userId._id}
+            initialFollowing={false}
+            variantWhenFollowing="hidden" // сховати, якщо вже фоловиш
+            variantWhenNotFollowing="outline" // показати "Follow"
+            width="auto"
+          />
         </div>
       </div>
 

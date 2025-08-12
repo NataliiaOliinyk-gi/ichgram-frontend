@@ -26,7 +26,6 @@ const ProfileInfo: FC<IProfileInfoProps> = ({
   isMe = false,
   posts,
 }: IProfileInfoProps) => {
-
   const followData = useSelector(selectFollowByUserId(user._id));
   const followersCount = followData?.followersCount ?? user.followersCount;
 
@@ -46,19 +45,20 @@ const ProfileInfo: FC<IProfileInfoProps> = ({
 
           {isMe && (
             <Link to="/api/me/edit-profile">
-              <Button text="Edit profile" variant="grey" />
+              <Button text="Edit profile" variant="secondary" />
             </Link>
           )}
 
           {!isMe && (
             <div className={styles.buttonsBox}>
-              {/* <Button text={"Follow"} /> */}
               <FollowButton
                 targetId={user._id}
                 initialFollowing={user.isFollowedByCurrentUser}
                 initialFollowersCount={user.followersCount}
+                variantWhenFollowing="secondary"
+                variantWhenNotFollowing="primary"
               />
-              <Button text={"Message"} variant={"grey"} />
+              <Button text={"Message"} variant={"secondary"} />
             </div>
           )}
         </div>
