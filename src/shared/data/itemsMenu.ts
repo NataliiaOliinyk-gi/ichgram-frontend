@@ -24,6 +24,7 @@ export interface IMenuItems {
   iconActive: React.FC<SVGProps<SVGSVGElement>>;
   type?: "link" | "modal";
   modalType?: ModalType;
+  openAsPanel?: boolean;
 }
 
 const menuItems: IMenuItems[] = [
@@ -40,6 +41,7 @@ const menuItems: IMenuItems[] = [
     text: "Search",
     icon: SearchIcon,
     iconActive: SearchIconActive,
+    openAsPanel: true,
   },
   {
     id: nanoid(),
@@ -61,6 +63,7 @@ const menuItems: IMenuItems[] = [
     text: "Notificaitons",
     icon: NotificationsIcon,
     iconActive: NotificationsIconActive,
+    openAsPanel: true,
   },
   {
     id: nanoid(),

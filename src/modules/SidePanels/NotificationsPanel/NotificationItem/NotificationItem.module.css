@@ -1,0 +1,84 @@
+.notificationsBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 22px;
+
+}
+
+.notificationsBox:hover{
+    background-color: var(--hover-form-background-color);
+}
+
+.ntfContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.notifBox {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 12px;
+    /* padding-bottom: 12px; */
+}
+
+.content p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 129%;
+    color: var(--main-text-color);
+    margin: 0;
+}
+
+.usernameText {
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 4px;
+    text-decoration: none;
+    color: var(--main-text-color);
+}
+
+.infoData {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 129%;
+    color: var(--grey-text-color);
+}
+
+.postBox {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.avatarBox {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 2px;
+    background: conic-gradient(#b93aaa, #e95950, #e99250, #eecd4a, #e99657, #e95950, #b83170, #aa3ab9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 2px;
+    object-fit: cover;
+    background-color: var(--form-background-color);
+}
+

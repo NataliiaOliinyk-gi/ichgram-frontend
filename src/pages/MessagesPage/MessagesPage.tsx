@@ -3,7 +3,7 @@
 const MessagesPage = ()=>{
     return (
         <main>
-            MessagesPage
+            
         </main>
     )
 };

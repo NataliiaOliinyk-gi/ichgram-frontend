@@ -1,5 +1,4 @@
 import backendInstance from "./instance";
-// import requestDecorator from "./requestDecorator";
 import type { IUser } from "../../typescript/interfaces";
 
 export interface IGetUserByIdPayload {

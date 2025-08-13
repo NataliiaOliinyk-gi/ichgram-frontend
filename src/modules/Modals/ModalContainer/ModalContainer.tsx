@@ -1,14 +1,14 @@
 import type { FC } from "react";
 import { useSelector } from "react-redux";
 
-import CreatePostModal from "../../../modules/Modals/CreatePostModal/CreatePostModal";
-import ViewPostModal from "../../../modules/Modals/ViewPostModal/ViewPostModal";
-import EditSelectionModal from "../../../modules/Modals/EditSelectionModal/EditSelectionModal";
-import EditPostModal from "../../../modules/Modals/EditPostModal/EditPostModal";
-import DeletePostModal from "../../../modules/Modals/DeletePostModal/DeletePostModal";
+import CreatePostModal from "../CreatePostModal/CreatePostModal";
+import ViewPostModal from "../ViewPostModal/ViewPostModal";
+import EditSelectionModal from "../EditSelectionModal/EditSelectionModal";
+import EditPostModal from "../EditPostModal/EditPostModal";
+import DeletePostModal from "../DeletePostModal/DeletePostModal";
 
 import { closeModal } from "../../../redux/modal/modal-slise";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppDispatch } from "../../../shared/hooks/useAppDispatch";
 import { selectModalStack } from "../../../redux/modal/modal-selector";
 
 import styles from "./ModalContainer.module.css";

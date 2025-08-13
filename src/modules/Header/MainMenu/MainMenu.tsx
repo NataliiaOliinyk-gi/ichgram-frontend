@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import menuItems from "../../../shared/data/itemsMenu";
@@ -17,6 +17,7 @@ const MainMenu: FC = () => {
   const user = useSelector(selectAuthUser);
 
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   const handleModalClick = (event: React.MouseEvent, type: ModalType) => {
     event.preventDefault();
@@ -25,11 +26,17 @@ const MainMenu: FC = () => {
 
   const element = menuItems.map((item: IMenuItems) => {
     const isModal = item.type === "modal";
+    const to = item.href;
+    const state = item.openAsPanel
+      ? { backgroundLocation: location }
+      : undefined;
 
     return (
       <li key={item.id}>
         <NavLink
-          to={item.href}
+          // to={item.href}
+          to={to}
+          state={state}
           onClick={
             isModal
               ? (event) => handleModalClick(event, item.modalType!)

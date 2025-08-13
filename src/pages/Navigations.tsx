@@ -1,20 +1,20 @@
 import { Routes, Route } from "react-router-dom";
 
-import MainPage from "./MainPage/MainPage";
+// import MainPage from "./MainPage/MainPage";
 import LoginPage from "./LoginPage/LoginPage";
 import RegisterPage from "./RegisterPage/RegisterPage";
 import ForgotPasswordPage from "./ForgotPasswordPage/ForgotPasswordPage";
 
-import SearchPage from "./SearchPage/SearchPage";
-import ExplorePage from "./ExplorePage/ExplorePage";
-import MessagesPage from "./MessagesPage/MessagesPage";
-import NotificaitonsPage from "./NotificaitonsPage/NotificaitonsPage";
-import UserProfilePage from "./UserProfilePage/UserProfilePage";
-import MyProfilePage from "./MyProfilePage/MyProfilePage";
-import EditProfilePage from "./EditProfilePage/EditProfilePage";
+// import SearchPage from "./SearchPage/SearchPage";
+// import ExplorePage from "./ExplorePage/ExplorePage";
+// import MessagesPage from "./MessagesPage/MessagesPage";
+// import NotificaitonsPage from "./NotificaitonsPage/NotificaitonsPage";
+// import UserProfilePage from "./UserProfilePage/UserProfilePage";
+// import MyProfilePage from "./MyProfilePage/MyProfilePage";
+// import EditProfilePage from "./EditProfilePage/EditProfilePage";
 
-import LogoutPage from "./LogoutPage/LogoutPage";
-import NotFoundPage from "./NotFoundPage/NotFoundPage";
+// import LogoutPage from "./LogoutPage/LogoutPage";
+// import NotFoundPage from "./NotFoundPage/NotFoundPage";
 
 import PublicRoute from "./PublicRoute/PublicRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
@@ -44,7 +44,9 @@ const Navigations = () => {
         </Route>
 
         <Route element={<PrivateRoute />}>
-          <Route element={<PrivateLayout />}>
+          <Route path="/*" element={<PrivateLayout />} />
+
+          {/* <Route element={<PrivateLayout />}>
             <Route path="/main" element={<MainPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/explore" element={<ExplorePage />} />
@@ -57,7 +59,7 @@ const Navigations = () => {
             <Route path="/api/auth/logout" element={<LogoutPage />} />
 
             <Route path="*" element={<NotFoundPage />} />
-          </Route>
+          </Route> */}
         </Route>
       </Routes>
     </>

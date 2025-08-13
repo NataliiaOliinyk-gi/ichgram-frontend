@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import menuItems from "../../shared/data/itemsMenu";
 
@@ -13,6 +13,7 @@ import styles from "./Footer.module.css";
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
+   const location = useLocation();
 
   const handleModalClick = (event: React.MouseEvent, type: ModalType) => {
     event.preventDefault();
@@ -21,10 +22,17 @@ const Footer: FC = () => {
 
   const element = menuItems.map((item: IMenuItems) => {
     const isModal = item.type === "modal";
+    const to = item.href;
+    const state = item.openAsPanel
+      ? { backgroundLocation: location }
+      : undefined;
+
     return (
       <li key={item.id}>
         <Link
-          to={item.href}
+          // to={item.href}
+          to={to}
+          state={state}
           className={styles.link}
           onClick={
             isModal

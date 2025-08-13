@@ -46,3 +46,27 @@ export interface IComment {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export type NotificationType = "follow" | "like" | "comment";
+
+export interface IPostFromNote {
+  _id: string;
+  text: string;
+  photo: string;
+}
+
+export interface ICommentFromNote {
+  _id: string;
+  text: string;
+}
+
+export interface INotification {
+   _id: string;
+  recipientId: string; // кому
+  senderId: IUserFromPost; // від кого
+  type: NotificationType;
+  postId?: IPostFromNote;
+  commentId?: ICommentFromNote;
+  isRead: boolean;
+  createdAt: Date;
+}
