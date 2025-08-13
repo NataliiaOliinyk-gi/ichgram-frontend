@@ -14,6 +14,7 @@ import NotificaitonsPage from "../../../pages/NotificaitonsPage/NotificaitonsPag
 import UserProfilePage from "../../../pages/UserProfilePage/UserProfilePage";
 import MyProfilePage from "../../../pages/MyProfilePage/MyProfilePage";
 import EditProfilePage from "../../../pages/EditProfilePage/EditProfilePage";
+import PostPage from "../../../pages/PostPage/PostPage";
 import LogoutPage from "../../../pages/LogoutPage/LogoutPage";
 import NotFoundPage from "../../../pages/NotFoundPage/NotFoundPage";
 
@@ -21,6 +22,7 @@ import NotFoundPage from "../../../pages/NotFoundPage/NotFoundPage";
 import NotificationsPanel from "../../../modules/SidePanels/NotificationsPanel/NotificationsPanel";
 import SearchPanel from "../../../modules/SidePanels/SearchPanel/SearchPanel";
 import NewChatPanel from "../../../modules/SidePanels/NewChatPanel/NewChatPanel";
+import PostOverlay from "../../../modules/SidePanels/PostOverlay/PostOverlay";
 
 import styles from "./PrivateLayout.module.css";
 
@@ -52,6 +54,7 @@ const PrivateLayout: FC = () => {
                 path="/api/me/edit-profile"
                 element={<EditProfilePage />}
               />
+              <Route path="/posts/:id" element={<PostPage />} />
               <Route path="/api/auth/logout" element={<LogoutPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
@@ -73,6 +76,24 @@ const PrivateLayout: FC = () => {
                     <Route path="/messages/new" element={<NewChatPanel />} />
                   </Routes>
                 </aside>
+
+                {/* центрований модальний шар для поста */}
+                <Routes>
+                  <Route
+                    path="/posts/:id"
+                    element={
+                      <>
+                        <div
+                          className={styles.modalBackdrop}
+                          onClick={() => navigate(-1)}
+                        />
+                        <div className={styles.centerModal}>
+                          <PostOverlay />
+                        </div>
+                      </>
+                    }
+                  />
+                </Routes>
               </>
             )}
           </div>

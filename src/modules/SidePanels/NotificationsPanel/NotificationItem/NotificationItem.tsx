@@ -1,6 +1,6 @@
 import type { ForwardedRef } from "react";
 import { forwardRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import defaultAvatar from "../../../../assets/icons/defaultAvatar.svg";
 
@@ -16,6 +16,9 @@ interface INotificationItemProps {
 
 const NotificationItem = forwardRef<HTMLLIElement, INotificationItemProps>(
   ({ note }, ref: ForwardedRef<HTMLLIElement>) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const noteDataInfo = getTimeAgo(note.createdAt ?? 0);
 
     let actionText = "";
@@ -33,6 +36,13 @@ const NotificationItem = forwardRef<HTMLLIElement, INotificationItemProps>(
         actionText = "";
         break;
     }
+
+    const openPost = () => {
+      if (!note.postId?._id) return;
+      navigate(`/posts/${note.postId._id}`, {
+        state: { backgroundLocation: location },
+      });
+    };
 
     return (
       <li className={styles.notificationsBox} ref={ref}>
@@ -63,7 +73,7 @@ const NotificationItem = forwardRef<HTMLLIElement, INotificationItemProps>(
           </div>
         </div>
         {note.postId?.photo && (
-          <div className={styles.postBox}>
+          <div className={styles.postBox} onClick={openPost}>
             <img
               src={note.postId?.photo}
               alt="User avatar"

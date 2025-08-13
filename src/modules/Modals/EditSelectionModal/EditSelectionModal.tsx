@@ -39,7 +39,7 @@ const EditSelectionModal: FC<IEditSelectionModalProps> = ({ post }) => {
       case "copyLink":
         try {
           const postId = post._id;
-          const link = `${window.location.origin}/api/posts/${postId}`;
+          const link = `${window.location.origin}/posts/${postId}`;
           await navigator.clipboard.writeText(link);
           alert("Link copied to clipboard!");
           dispatch(closeModal());

@@ -30,10 +30,11 @@
 .btnOutline {
     background-color: var(--white-background-color);
     color: var(--second-text-color);
-    padding: 0;
+    padding: 0px 38px;
 }
 
 .btnOutline:hover {
     color: var(--hover-text-color);
+     background-color: var(--white-background-color);
 }
 

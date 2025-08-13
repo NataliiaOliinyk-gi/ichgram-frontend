@@ -14,8 +14,6 @@ import type { IUser } from "../../../typescript/interfaces";
 
 import styles from "./SearchPanel.module.css";
 
-const limit = 10;
-
 const SearchPanel: FC = () => {
   const [users, setUsers] = useState<IUser[]>([]);
   const [q, setQ] = useState("");
@@ -36,7 +34,7 @@ const SearchPanel: FC = () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await searchUsersApi(q, pageToLoad, limit);
+        const data = await searchUsersApi(q, pageToLoad);
         if (data !== undefined) {
           setPage(data.page);
           setHasMore(data.hasMore);
@@ -115,13 +113,19 @@ const SearchPanel: FC = () => {
           <img src={ClearIcon} alt="ClearIcon" />
         </div>
       </div>
-      {users && (
+
+      {users && !(users.length === 0) && (
         <div className={styles.contentBox}>
           <p className={styles.title}>Recent</p>
         </div>
       )}
 
       <ul className={styles.searchContainer}>{elements}</ul>
+
+      {!loading && !error && q.trim() !== "" && users.length === 0 && (
+        <p className={styles.noResults}>No matching users found.</p>
+      )}
+
       {loading && <Loader loading={loading} />}
       {error && <Error>{error}</Error>}
     </div>

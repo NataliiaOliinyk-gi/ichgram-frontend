@@ -37,3 +37,24 @@
   overflow: hidden;
   /* overflow-y: auto; */
 }
+
+/* модальний шар поверх панелі */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.2);
+  z-index: 950; 
+}
+
+.centerModal {
+  position: fixed;
+  z-index: 960;   
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--white-background-color);
+  border-radius: 3px;
+  width: 935px;
+  max-height: 90vh;
+  overflow: hidden;
+}
