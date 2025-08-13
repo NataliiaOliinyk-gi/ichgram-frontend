@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import AuthLink from "../AuthLink/AuthLink";
 
+import Logo from "/image/ICHGRA_2.png"
+
 import styles from "./AuthContentBox.module.css";
 
 interface IAuthContentBoxProps {
@@ -36,7 +38,7 @@ const AuthContentBox: FC<IAuthContentBoxProps> = ({
     <div className={styles.authContentBox}>
       {showImage && (
         <div className={styles.imageContainer}>
-          <img src="../../../public/image/ICHGRA_2.png" alt="Ichgram" />
+          <img src={Logo} alt="Ichgram" />
         </div>
       )}
 

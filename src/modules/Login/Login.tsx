@@ -12,6 +12,8 @@ import SuccessMessage from "../../shared/components/SuccessMessage/SuccessMessag
 import LoginForm from "./LoginForm/LoginForm";
 import ResendVerificationForm from "./ResendVerificationForm/ResendVerificationForm";
 
+import background from "/image/Background.png"
+
 import { selectAuth } from "../../redux/auth/auth-selector";
 import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 import {
@@ -87,7 +89,7 @@ const Login: FC = () => {
   return (
     <>
       <div className={styles.imageContainer}>
-        <img src="../../public/image/Background.png" alt="Background" />
+        <img src={background} alt="Background" />
       </div>
 
       <AuthLayout>

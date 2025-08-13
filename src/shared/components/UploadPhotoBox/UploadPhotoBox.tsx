@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { useState } from "react";
 
 import Error from "../Error/Error";
-import uploadIcon from "../../../../public/image/upload.svg";
+import uploadIcon from "/image/upload.svg";
 
 import styles from "./UploadPhotoBox.module.css";
 
