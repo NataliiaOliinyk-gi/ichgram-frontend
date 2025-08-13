@@ -8,7 +8,7 @@ export interface IUser {
   website?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  verified?: boolean;
+  verify?: boolean;
   followersCount: number;
   followingCount: number;
   isFollowedByCurrentUser?: boolean

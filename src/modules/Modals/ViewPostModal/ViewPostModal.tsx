@@ -44,7 +44,6 @@ const ViewPostModal: FC<IViewPostProps> = ({ post }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // const [comment, setComment] = useState<IComment>();
   const [loadingAddComment, setLoadingAddComment] = useState<boolean>(false);
   const [errorAddComment, setErrorAddComment] = useState<string | null>(null);
 

@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { AxiosError } from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 import TitlePanel from "../../../shared/components/TitlePanel/TitlePanel";
 import Loader from "../../../shared/components/Loader/Loader";
@@ -16,35 +16,74 @@ import styles from "./NotificationsPanel.module.css";
 
 const NotificationsPanel: FC = () => {
   const [notes, setNotes] = useState<INotification[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await getNotificationsApi();
-        if (data !== undefined) {
-          setNotes(data);
-        }
-      } catch (error) {
-        const message =
-          (error as AxiosError<{ message: string }>).response?.data?.message ||
-          (error as AxiosError).message ||
-          "Unbekannter Fehler";
-        setError(message);
-      } finally {
-        setLoading(false);
+  const fetchNotifications = useCallback(async (pageToLoad: number) => {
+    if (loading) return;
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await getNotificationsApi(pageToLoad);
+      if (data !== undefined) {
+        setPage(data.page);
+        setHasMore(data.hasMore);
+        setNotes((prev) =>
+          pageToLoad === 1
+            ? data.notifications
+            : [...prev, ...data.notifications]
+        );
       }
-    };
-
-    fetchNotifications();
+    } catch (error) {
+      const message =
+        (error as AxiosError<{ message: string }>).response?.data?.message ||
+        (error as AxiosError).message ||
+        "Unbekannter Fehler";
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const elements = notes.map((item) => (
-    <NotificationItem key={item._id} note={item} />
-  ));
+  useEffect(() => {
+    setNotes([]);
+    setPage(1);
+    setHasMore(true);
+    setError(null);
+    fetchNotifications(1);
+  }, [fetchNotifications]);
+
+  const observer = useRef<IntersectionObserver | null>(null);
+
+  const onLoadMore = useCallback(() => {
+    if (loading || !hasMore) return;
+    fetchNotifications(page + 1);
+  }, [loading, hasMore, fetchNotifications, page]);
+
+  const lastItemRef = useCallback(
+    (node: HTMLLIElement | null) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) onLoadMore();
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore, onLoadMore]
+  );
+
+  const elements = notes.map((item, index) => {
+    const isLast = index === notes.length - 1;
+    return (
+      <NotificationItem
+        key={item._id}
+        note={item}
+        ref={isLast ? lastItemRef : undefined}
+      />
+    );
+  });
 
   return (
     <div className={styles.panel}>

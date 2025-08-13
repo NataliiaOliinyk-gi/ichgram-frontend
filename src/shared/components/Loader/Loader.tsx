@@ -19,7 +19,7 @@ const Loader: FC<ILoaderProps> = ({ loading }) => {
             display: "block",
             margin: "0 auto",
           }}
-          size={15}
+          size={8}
           speedMultiplier={0.7}
           aria-label="Loading Spinner"
           data-testid="loader"

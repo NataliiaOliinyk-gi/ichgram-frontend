@@ -5,7 +5,7 @@
     padding: 10px 22px;
 }
 
-.searchBox:hover{
+.searchBox:hover {
     background-color: var(--hover-form-background-color);
 }
 
@@ -20,10 +20,9 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-left: 4px;
+    padding-left: 8px;
+    gap: 6px;
 }
-
-
 
 .usernameText {
     font-weight: 600;
@@ -31,6 +30,14 @@
     margin-right: 4px;
     text-decoration: none;
     color: var(--main-text-color);
+}
+
+.fullNameText {
+    font-weight: 400;
+    font-size: 14px;
+    margin-right: 4px;
+    line-height: 129%;
+    color: var(--grey-text-color);
 }
 
 .avatarBox {
@@ -53,4 +60,3 @@
     object-fit: cover;
     background-color: var(--form-background-color);
 }
-
