@@ -8,6 +8,7 @@ import Error from "../../shared/components/Error/Error";
 
 import { getPostsApi } from "../../shared/api/post-api";
 import { seedFromFeed } from "../../redux/likes/likes-slise";
+import { seedUserFollowState } from "../../redux/follows/follows-slise";
 import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 
 import type { IPost } from "../../typescript/interfaces";
@@ -22,14 +23,31 @@ const Main: FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchMyPosts = async () => {
+    const fetchPosts = async () => {
       try {
         setLoading(true);
         setError(null);
         const data = await getPostsApi();
         if (data !== undefined) {
           setPosts(data);
+          //  лайки
           dispatch(seedFromFeed(data));
+          //  фолови
+          const seen = new Set<string>();
+          data.forEach((post) => {
+            const author = post.userId;
+            const authorId = author._id as string;
+            if (!authorId || seen.has(authorId)) return;
+            seen.add(authorId);
+
+            dispatch(
+              seedUserFollowState({
+                userId: authorId,
+                isFollowedByCurrentUser: !!post.isAuthorFollowedByCurrentUser,
+                followersCount: author.followersCount ?? 0,
+              })
+            );
+          });
         }
       } catch (error) {
         const message =
@@ -42,7 +60,7 @@ const Main: FC = () => {
       }
     };
 
-    fetchMyPosts();
+    fetchPosts();
   }, [dispatch]);
 
   const elements = posts.map((item) => (

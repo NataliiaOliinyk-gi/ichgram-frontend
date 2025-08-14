@@ -23,7 +23,7 @@ export interface IUserFromPost {
 
 export interface IPost {
   _id: string;
-  userId: IUserFromPost;
+  userId: IUserFromPost & { followersCount?: number };
   text: string;
   photo: string;
   likesCount: number;
@@ -31,6 +31,7 @@ export interface IPost {
   createdAt?: Date;
   updatedAt?: Date;
   isLikedByCurrentUser: boolean;
+  isAuthorFollowedByCurrentUser?: boolean;
 }
 
 export interface IToggleLike {

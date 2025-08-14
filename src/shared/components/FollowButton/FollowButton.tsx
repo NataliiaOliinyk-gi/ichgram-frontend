@@ -69,6 +69,11 @@ const FollowButton: FC<IFollowButtonProps> = ({
 
   const variant = isFollowing ? variantWhenFollowing : variantWhenNotFollowing;
   const text = isFollowing ? textWhenFollowing : textWhenNotFollowing;
+  console.log(text);
+  console.log(isFollowing);
+  console.log(item);
+  
+  
 
    if (variant === "hidden") return null;
 
