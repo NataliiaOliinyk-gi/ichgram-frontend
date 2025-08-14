@@ -20,10 +20,15 @@ export const getUserByIdApi = async (id: string): Promise<IUser> => {
 export const searchUsersApi = async (
   q: string,
   page: number = 1,
-  limit: number = 10
+  limit: number = 20
 ): Promise<ISearchResultResponse> => {
   const { data } = await backendInstance.get(`/users/search`, {
     params: { q, page, limit },
   });
+  return data;
+};
+
+export const getUsersApi = async (): Promise<IUser[]> => {
+  const { data } = await backendInstance.get(`/users/`);
   return data;
 };

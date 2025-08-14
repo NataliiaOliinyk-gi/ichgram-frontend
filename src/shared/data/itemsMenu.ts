@@ -56,6 +56,7 @@ const menuItems: IMenuItems[] = [
     text: "Messages",
     icon: MessagesIcon,
     iconActive: MessagesIconActive,
+    openAsPanel: true,
   },
   {
     id: nanoid(),

@@ -1,0 +1,8 @@
+.box {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 133%;
+    text-align: center;
+    color: var(--grey-text-color);
+    margin: 50px auto;
+}

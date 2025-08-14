@@ -30,10 +30,29 @@ const PrivateLayout: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const state = location.state as { backgroundLocation?: Location } | undefined;
-  const backgroundLocation = state?.backgroundLocation;
+  // const state = location.state as { backgroundLocation?: Location } | undefined;
+  // const backgroundLocation = state?.backgroundLocation;
 
-  const onClosePanel = () => navigate(-1);
+  const state = location.state as
+    | { backgroundLocation?: Location; showPanel?: "messages" }
+    | undefined;
+  const backgroundLocation = state?.backgroundLocation;
+  const panelOnMessages =
+    location.pathname.startsWith("/messages") &&
+    state?.showPanel === "messages";
+
+  // де рендерити головний контент:
+  const routesLocation =
+    backgroundLocation && !panelOnMessages ? backgroundLocation : location;
+
+  const onClosePanel = () => {
+    if (panelOnMessages) {
+      // прибрати панель, лишитись на /messages
+      navigate("/messages", { replace: true, state: undefined });
+    } else {
+      navigate(-1);
+    }
+  };
 
   return (
     <>
@@ -42,7 +61,8 @@ const PrivateLayout: FC = () => {
           <Header />
           <div className={styles.mainContent}>
             {/* ГОЛОВНИЙ КОНТЕНТ */}
-            <Routes location={backgroundLocation || location}>
+            {/* <Routes location={backgroundLocation || location}> */}
+            <Routes location={routesLocation}>
               <Route path="/main" element={<MainPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/explore" element={<ExplorePage />} />
@@ -63,7 +83,8 @@ const PrivateLayout: FC = () => {
             <ModalContainer />
 
             {/* НАКЛАДНІ ПАНЕЛІ — лише якщо є фон */}
-            {backgroundLocation && (
+            {/* {backgroundLocation && ( */}
+            {(backgroundLocation || panelOnMessages) && (
               <>
                 <div className={styles.backdrop} onClick={onClosePanel} />
                 <aside className={styles.panel}>
@@ -73,7 +94,8 @@ const PrivateLayout: FC = () => {
                       element={<NotificationsPanel />}
                     />
                     <Route path="/search" element={<SearchPanel />} />
-                    <Route path="/messages/new" element={<NewChatPanel />} />
+                    <Route path="/messages" element={<NewChatPanel />} />
+                    {/* <Route path="/messages/new" element={<NewChatPanel />} /> */}
                   </Routes>
                 </aside>
 
@@ -105,6 +127,17 @@ const PrivateLayout: FC = () => {
 };
 
 export default PrivateLayout;
+
+// // const onClosePanel = () => navigate(-1);
+// const onClosePanel = () => {
+//   // якщо відкрито панель повідомлень — переходимо на повну сторінку чатів
+//   if (location.pathname.startsWith("/messages")) {
+//     navigate("/messages", { replace: true });
+//   } else {
+//     // інші панелі просто закриваємо поверненням назад
+//     navigate(-1);
+//   }
+// };
 
 {
   /* <div className={styles.layout}>

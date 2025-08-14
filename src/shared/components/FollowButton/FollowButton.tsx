@@ -16,8 +16,8 @@ import styles from "./FollowButton.module.css";
 
 interface IFollowButtonProps {
   targetId: string;
-  initialFollowing?: boolean; 
-  initialFollowersCount?: number; 
+  initialFollowing?: boolean;
+  initialFollowersCount?: number;
   variantWhenFollowing?: "primary" | "secondary" | "outline" | "hidden";
   variantWhenNotFollowing?: "primary" | "secondary" | "outline";
   textWhenFollowing?: string;
@@ -29,8 +29,8 @@ const FollowButton: FC<IFollowButtonProps> = ({
   targetId,
   initialFollowing,
   initialFollowersCount,
-  variantWhenFollowing = "secondary",     // у профілі (Unfollow)
-  variantWhenNotFollowing = "primary",    // у профілі (Follow)
+  variantWhenFollowing = "secondary", // у профілі (Unfollow)
+  variantWhenNotFollowing = "primary", // у профілі (Follow)
   textWhenFollowing = "Unfollow",
   textWhenNotFollowing = "Follow",
   width,
@@ -54,7 +54,7 @@ const FollowButton: FC<IFollowButtonProps> = ({
   const isFollowing = item?.isFollowing ?? initialFollowing ?? false;
   const loading = item?.loading ?? false;
 
-   // Якщо підписані і треба ховати кнопку
+  // Якщо підписані і треба ховати кнопку
   if (isFollowing && variantWhenFollowing === "hidden") {
     return null;
   }
@@ -69,13 +69,8 @@ const FollowButton: FC<IFollowButtonProps> = ({
 
   const variant = isFollowing ? variantWhenFollowing : variantWhenNotFollowing;
   const text = isFollowing ? textWhenFollowing : textWhenNotFollowing;
-  console.log(text);
-  console.log(isFollowing);
-  console.log(item);
-  
-  
 
-   if (variant === "hidden") return null;
+  if (variant === "hidden") return null;
 
   return (
     <div className={styles.followBtn}>

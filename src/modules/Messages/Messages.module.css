@@ -1,0 +1,224 @@
+.container {
+    /* margin-top: 20px; */
+    /* margin-left: 250px; */
+    width: 100%;
+}
+
+.recipientUserAvatarBox {
+    border-bottom: 1px solid #dbdbdb;
+    width: 797px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+}
+
+.srfContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.usersBox {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 8px;
+    gap: 6px;
+}
+
+.usernameText {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 125%;
+    margin-right: 4px;
+    text-decoration: none;
+    color: var(--main-text-color);
+}
+
+.avatarBox {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    padding: 2px;
+    border: 2px solid var(--avatar-border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatarBoxProfile {
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    padding: 2px;
+    border: 2px solid var(--avatar-border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 2px;
+    object-fit: cover;
+    background-color: var(--form-background-color);
+}
+
+.date {
+    margin-top: 64px;
+    margin-bottom: 148px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 133%;
+    text-align: center;
+    color: var(--date-text-color);
+}
+
+.btn {
+    margin: 17px auto;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    width: 173px;
+    height: 32px;
+    background: #efefef;
+}
+
+.btn:hover {
+    background-color: var(--hover-background-color);
+}
+
+.userProfileBox {
+    margin-top: 63px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+}
+
+.usersBoxPr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.fullNameText {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 129%;
+    text-align: center;
+    color: var(--grey-text-color);
+}
+
+.usernameTextPr {
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 126%;
+    text-align: center;
+}
+
+.messagesContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    padding: 16px;
+}
+
+
+
+.userMessages {
+    display: flex;
+    gap: 11px;
+    align-self: flex-start;
+}
+
+.avatarUserBox {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    padding: 2px;
+    border: 2px solid var(--avatar-border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .recipientAvatar{
+
+}
+.senderAvatar{} */
+
+.message {
+    border-radius: 15px;
+    width: 397px;
+    padding: 29px 17px;
+}
+
+.recipientBox {
+    align-self: flex-start;
+}
+
+.senderBox {
+    align-self: flex-end;
+}
+
+.messageRecipient {
+    background: var(--second-background-color);
+}
+
+.messageSender {
+    background: var(--message-background-color);
+}
+
+.senderText {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 129%;
+    text-align: center;
+    color: var(--white-text-color);
+}
+
+.recipientText {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 129%;
+    text-align: center;
+    color: var(--main-text-color);
+}
+
+.addMessegeContainer {
+    width: 100%;
+    margin-top: 66px;
+    margin-bottom: 91px;
+}
+
+.inputMessage {
+    width: 100%;
+    height: 46px;
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    padding: 13px 51px 13px 51px;
+}
+
+.inputMessage:hover {
+    background-color: var(--hover-background-color);
+}
+
+.inputMessage::placeholder {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 120%;
+    color: var(--grey-text-color);
+}
+
+.inputMessage:focus {
+    outline: none;
+}

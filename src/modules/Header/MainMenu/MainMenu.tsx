@@ -26,9 +26,15 @@ const MainMenu: FC = () => {
 
   const element = menuItems.map((item: IMenuItems) => {
     const isModal = item.type === "modal";
+    const isMessages = item.href === "/messages";
     const to = item.href;
-    const state = item.openAsPanel
-      ? { backgroundLocation: location }
+    // const state = item.openAsPanel
+    //   ? { backgroundLocation: location }
+    //   : undefined;
+    const state = isMessages
+      ? { showPanel: "messages" } // панель поверх самої /messages
+      : item.openAsPanel
+      ? { backgroundLocation: location } // звичайна панель (search/notifications)
       : undefined;
 
     return (

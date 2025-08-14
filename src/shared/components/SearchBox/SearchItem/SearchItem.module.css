@@ -60,3 +60,18 @@
     object-fit: cover;
     background-color: var(--form-background-color);
 }
+
+.rowBtn {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    background: none;
+    border: 0;
+    text-align: start;
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 4px;
+    text-decoration: none;
+    color: var(--main-text-color);
+    margin-left: -6px;
+}
