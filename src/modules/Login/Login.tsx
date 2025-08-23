@@ -12,7 +12,7 @@ import SuccessMessage from "../../shared/components/SuccessMessage/SuccessMessag
 import LoginForm from "./LoginForm/LoginForm";
 import ResendVerificationForm from "./ResendVerificationForm/ResendVerificationForm";
 
-import background from "/image/Background.png"
+import background from "/image/Background.png";
 
 import { selectAuth } from "../../redux/auth/auth-selector";
 import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
@@ -21,7 +21,7 @@ import {
   verify,
   resendVerificationEmail,
 } from "../../redux/auth/auth-thunks";
-import highlightEmail from "../../utils/highlightEmail";
+import highlightEmail from "../../shared/utils/highlightEmail";
 
 import type {
   ILoginPayload,

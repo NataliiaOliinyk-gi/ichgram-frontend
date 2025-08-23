@@ -13,7 +13,7 @@ import Error from "../../shared/components/Error/Error";
 import { selectAuth } from "../../redux/auth/auth-selector";
 import { useAppDispatch } from "../../shared/hooks/useAppDispatch";
 import { forgotPassword } from "../../redux/auth/auth-thunks";
-import highlightEmail from "../../utils/highlightEmail";
+import highlightEmail from "../../shared/utils/highlightEmail";
 
 import type { IForgotPasswordPayload } from "../../shared/api/auth-api";
 
@@ -40,7 +40,12 @@ const ForgotPassword: FC = () => {
         {successSend && <SuccessMessage>{successMessage}</SuccessMessage>}
 
         <AuthContentBox
-          childrenForm={<ForgotPasswordForm submitForm={submitForm} disabled={formDisabled}/>}
+          childrenForm={
+            <ForgotPasswordForm
+              submitForm={submitForm}
+              disabled={formDisabled}
+            />
+          }
           icon={<ForgotIcon />}
           textTitle="Trouble logging in?"
           textDescription="Enter your email and we'll send you a link to get back into your account."

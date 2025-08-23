@@ -66,10 +66,18 @@ const fields: IFields = {
     name: "password",
     rules: {
       required: "Password is required",
+      minLength: {
+        value: 6,
+        message: "Password must be at least 6 characters",
+      },
+      maxLength: {
+        value: 64,
+        message: "Password must be less than 64 characters",
+      },
       pattern: {
-        value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\S]+$/,
+        value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d])\S+$/,
         message:
-          "Password must contains at least 1 letter, 1 number and 1 special symbol",
+          "Password must contain at least 1 letter, 1 number and 1 special symbol",
       },
     },
   },
